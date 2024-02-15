@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:\\Users\\mattr\\OneDrive\\Documents\\avr8-gnu-toolchain\\avr\\include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerPath": "C:\\Users\\mattr\\OneDrive\\Documents\\avr8-gnu-toolchain\\bin\\avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                "-DF_CPU=8000000UL",
+                "-Os"
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}
