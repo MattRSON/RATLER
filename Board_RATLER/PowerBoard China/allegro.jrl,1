@@ -1,0 +1,34 @@
+\t (00:00:15) allegro 17.4 P001 Windows SPB 64-bit Edition
+\t (00:00:15)     Journal start - Mon Jan  2 14:31:08 2023
+\t (00:00:15)         Host=DESKTOP-0LCPE9E User=mattr Pid=38204 CPUs=6
+\t (00:00:15) CmdLine= C:\Cadence\SPB_17.4\tools\bin\allegro.exe
+\t (00:00:15) 
+\d (00:00:15) Design opened: C:/Users/mattr/Documents/GitHub/RATLER/Board_RATLER/PowerBoard China/PowerBoardChina.brd
+\i (00:00:15) wbedit 
+\i (00:00:18) zoom in 1 
+\i (00:00:18) setwindow pcb
+\i (00:00:18) zoom in 5645.24 5068.42
+\t (00:00:18) Grids are drawn 16.00, 16.00 apart for enhanced viewing.
+\i (00:00:18) trapsize 1540
+\i (00:00:19) zoom out 1 
+\i (00:00:19) setwindow pcb
+\i (00:00:19) zoom out 5617.52 4929.84
+\t (00:00:19) Grids are drawn 32.00, 32.00 apart for enhanced viewing.
+\i (00:00:19) trapsize 3080
+\i (00:00:21) artwork 
+\i (00:00:22) setwindow form.film_control
+\i (00:00:22) FORM film_control filmtree  BOTTOM_SOLDERMASK 
+\i (00:00:28) FORM film_control filmtree  BOTTOM 
+\i (00:01:06) FORM film_control filmtree  BOTTOM_SOLDERMASK 
+\i (00:16:20) setwindow pcb
+\i (00:16:20) artwork 
+\i (00:16:25) setwindow form.film_control
+\i (00:16:25) FORM film_control general_parameters  
+\i (00:16:27) FORM film_control film_control  
+\i (00:16:36) FORM film_control cancel  
+\i (00:16:36) setwindow pcb
+\i (00:16:36) wbedit 
+\i (00:30:40) exit 
+\e (00:30:40) Do you want to save the changes you made to PowerBoardChina.brd?
+\i (00:30:42) fillin no 
+\t (00:30:42)     Journal end - Mon Jan  2 15:01:35 2023

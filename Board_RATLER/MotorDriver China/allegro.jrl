@@ -1,0 +1,22 @@
+\t (00:00:13) allegro 17.4 P001 Windows SPB 64-bit Edition
+\t (00:00:13)     Journal start - Mon May  8 22:37:53 2023
+\t (00:00:13)         Host=MATHEWSLAPTOP User=mattr Pid=18344 CPUs=6
+\t (00:00:13) CmdLine= c:\cadence\spb_17.4\tools\bin\allegro.exe C:\Users\mattr\OneDrive\Documents\GitHub\RATLER\Board_RATLER\MotorDriver China\MotorDriver.brd
+\t (00:00:13) 
+   (00:00:13) Loading axlcore.cxt 
+\t (00:00:14) Opening existing design...
+\i (00:00:14) QtSignal SPBFoldDockArea FoldAreaTabWidget currentChanged MotorDriver
+\d (00:00:14) Design opened: C:/Users/mattr/OneDrive/Documents/GitHub/RATLER/Board_RATLER/MotorDriver China/MotorDriver.brd
+\t (00:00:14) Grids are drawn 64.00, 64.00 apart for enhanced viewing.
+\i (00:00:14) trapsize 6248
+\i (00:00:14) trapsize 6555
+\t (00:00:14) Grids are drawn 64.00, 64.00 apart for enhanced viewing.
+\i (00:00:14) trapsize 6555
+\i (00:00:15) trapsize 6248
+\i (00:00:16) generaledit 
+\t (00:00:18) Grids are drawn 32.00, 32.00 apart for enhanced viewing.
+\i (00:00:18) trapsize 3804
+\i (00:26:26) color192 
+\i (00:26:26) generaledit 
+\i (01:14:10) exit 
+\t (01:14:10)     Journal end - Mon May  8 23:51:51 2023

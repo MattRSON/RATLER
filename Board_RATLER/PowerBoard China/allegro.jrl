@@ -1,0 +1,22 @@
+\t (00:00:02) allegro 17.4 P001 Windows SPB 64-bit Edition
+\t (00:00:02)     Journal start - Tue Jan  3 11:31:09 2023
+\t (00:00:02)         Host=DESKTOP-0LCPE9E User=mattr Pid=41592 CPUs=6
+\t (00:00:02) CmdLine= C:\Cadence\SPB_17.4\tools\bin\allegro.exe
+\t (00:00:02) 
+   (00:00:02) Loading axlcore.cxt 
+\t (00:00:03) Starting new design...
+\i (00:00:03) QtSignal SPBFoldDockArea FoldAreaTabWidget currentChanged Dip2x10
+\i (00:00:04) trapsize 2713
+\i (00:00:04) trapsize 2983
+\i (00:00:04) trapsize 2713
+\i (00:00:04) trapsize 5122
+\i (00:00:04) trapsize 5122
+\i (00:00:05) trapsize 1005
+\i (00:00:18) open 
+\i (00:00:36) fillin "C:/Users/mattr/Documents/GitHub/PCB-Libraries-and-footprints/OrCAD Libraries/Libraries/Sip9.dra"
+\i (00:00:36) cd "C:/Users/mattr/Documents/GitHub/PCB-Libraries-and-footprints/OrCAD Libraries/Libraries"
+\t (00:00:36) Opening existing design...
+\i (00:00:38) fillin yes 
+\i (00:00:38) trapsize 6
+\i (00:00:38) trapsize 6
+\t (00:00:38)     Journal end - Tue Jan  3 11:31:45 2023
