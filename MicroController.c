@@ -1,15 +1,40 @@
 #include <avr/io.h>
- #include <util/delay.h>
 
- int main()
- {
-     // Set built-in LED pin as output
-     DDRB |= (1 << DDB0);
-     while (1) {
-         PORTB |=  (1 << PB0);   // LED on
-         _delay_ms(10);         // wait 500ms
-         PORTB &= ~(1 << PB0);   // LED off
-         _delay_ms(10);         // wait 500ms
-     }
-     return 0;
- }
+#define   SET_BIT(Reg, Bit) (Reg |=  (1 << (Bit)))
+#define CLEAR_BIT(Reg, Bit) (Reg &= ~(1 << (Bit)))
+#define  FLIP_BIT(Reg, Bit) (Reg ^=  (1 << (Bit)))
+#define  TEST_BIT(Reg, Bit) ((Reg >> (Bit)) & 1)
+
+void SPI_SlaveInit(void) {
+    // Set MISO as output
+    DDRB |= (1<<DDB4);
+    // Enable SPI
+    SPCR = (1<<SPE);
+}
+
+char SPI_Receive(void) {
+    // Wait for reception to complete
+    while(!(SPSR & (1<<SPIF))) {}
+    //return data register
+    return SPDR;
+}
+
+int main(void) {
+
+SPI_SlaveInit;
+
+DDRB |= (1<<DDB0);
+char data = 0;
+
+while (1) {
+    data = SPI_Receive;
+    if (data == 1) {
+        SET_BIT(PORTB,DDB0);
+    }
+    else {
+        CLEAR_BIT(PORTB,DDB0);
+    }
+}
+
+
+}

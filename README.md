@@ -8,3 +8,31 @@ and make from gnumin32
 
 Flashing on rpi4
 sudo avrdude -p atmega328p -C /etc/avrdude_gpio.conf -c RATLER -v -U flash:w:MicroController.hex:i
+
+
+
+AVR side things to add
+- spi communication
+    - speed
+    - direction
+    - position of all wheels
+    - flags for onboard sensors
+- motor control
+    - pwm / speed control
+    - direction
+    - flags for over temp
+- position feedback
+    - positional loop so motors know where they are
+
+AVR pcb
+- sensor pins ie 3.3v, signal, gnd
+    - selectable 5v 3.3v header
+- spi and programming header
+- led status control
+- battery monitor
+- sub voltage monitors
+- motor control and input header
+- motor position header
+- analog header
+- any unused port has header
+- crystal
