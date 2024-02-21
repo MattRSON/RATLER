@@ -22,6 +22,6 @@ while(1):
     print('t1')
     data = input("Enter 1 or 0: ")
     print('t2')
-    spi.writebytes(int(data))
+    spi.writebytes2(int(data))
     print('t3')
             
