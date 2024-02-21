@@ -21,20 +21,20 @@ char SPI_Receive(void) {
 
 int main(void) {
 
-SPI_SlaveInit;
+    SPI_SlaveInit;
 
-DDRB |= (1<<DDB0);
-char data = 0;
+    DDRB |= (1<<DDB0);
+    char data = 0;
 
-while (1) {
-    data = SPI_Receive;
-    if (data == 1) {
-        SET_BIT(PORTB,DDB0);
+    while (1) {
+        data = SPI_Receive;
+        if (data == 1) {
+            SET_BIT(PORTB,DDB0);
+        }
+        else {
+            CLEAR_BIT(PORTB,DDB0);
+        }
     }
-    else {
-        CLEAR_BIT(PORTB,DDB0);
-    }
-}
 
 
 }
