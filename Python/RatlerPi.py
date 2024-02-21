@@ -20,5 +20,5 @@ spi.mode = 0
 
 while(1):
     data = input("Enter 1 or 0: ")
-    spi.writebytes(chr(data))
+    spi.writebytes(data)
             
