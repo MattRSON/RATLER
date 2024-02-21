@@ -24,10 +24,10 @@ int main(void) {
     SPI_SlaveInit;
 
     DDRB |= (1<<DDB0);
-    char data = 0;
+    int data = 0;
 
     while (1) {
-        data = SPI_Receive;
+        data = (int) SPI_Receive;
         if (data == 1) {
             SET_BIT(PORTB,DDB0);
         }
