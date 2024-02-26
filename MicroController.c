@@ -19,6 +19,7 @@ void SPI_SlaveInit(void) {
     SET_BIT(SPCR, SPE);
     // Enable SPI interupts
     SET_BIT(SPCR,SPIE);
+    SET_BIT(PORTB,PB1);
     
 }
 
