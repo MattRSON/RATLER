@@ -11,11 +11,13 @@
 #define  TEST_BIT(Reg, Bit) ((Reg >> (Bit)) & 1)
 
 volatile int data = 0;
+
 void SPI_SlaveInit(void) {
     // Set MISO as output
-    DDRB |= (1<<DDB4);
+    SET_BIT(DDRB,DDB4);
     // Enable SPI
     SET_BIT(SPCR, SPE);
+    // Enable SPI interupts
     SET_BIT(SPCR,SPIE);
 }
 
@@ -29,13 +31,15 @@ char SPI_Receive(void) {
 */
 ISR (SPIF_vector){
     data = SPDR;
+    FLIP_BIT(PORTB,DDB1);
 }
 
 int main(void) {
 
     SPI_SlaveInit;
     sei();
-    DDRB |= (1<<DDB0);
+    SET_BIT(DDRB,DDB0);
+    SET_BIT(DDRB,DDB1); // Test LED
     // try an spi interupt
     while (1) {
         //data = (int) SPI_Receive;
