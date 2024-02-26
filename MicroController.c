@@ -45,7 +45,7 @@ int main(void) {
     SET_BIT(DDRB,PB1); // Test LED
     // try an spi interupt
     while (1) {
-        data = SPI_Receive;
+        data = SPI_Receive();
         if (data == 1) {
             SET_BIT(PORTB,PB0);
         }
