@@ -5,7 +5,7 @@ import spidev
 # Use Spi bus 0
 bus = 0
 
-# Chip select pin (Will be ignored for other pins)
+# Chip select pin
 device = 1
 
 # Enable spi

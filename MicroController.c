@@ -19,6 +19,7 @@ void SPI_SlaveInit(void) {
     SET_BIT(SPCR, SPE);
     // Enable SPI interupts
     SET_BIT(SPCR,SPIE);
+    
 }
 
 /*
@@ -29,14 +30,14 @@ char SPI_Receive(void) {
     return SPDR;
 }
 */
-ISR (SPIF_vector){
+ISR (SPI_STC_vect){
     data = SPDR;
-    FLIP_BIT(PORTB,DDB1);
+    FLIP_BIT(PORTB,PB1);
 }
 
 int main(void) {
 
-    SPI_SlaveInit;
+    SPI_SlaveInit();
     sei();
     SET_BIT(DDRB,DDB0);
     SET_BIT(DDRB,DDB1); // Test LED
@@ -44,10 +45,10 @@ int main(void) {
     while (1) {
         //data = (int) SPI_Receive;
         if (data == 1) {
-            SET_BIT(PORTB,DDB0);
+            SET_BIT(PORTB,PB0);
         }
         else {
-            CLEAR_BIT(PORTB,DDB0);
+            CLEAR_BIT(PORTB,PB0);
         }
     }
 
