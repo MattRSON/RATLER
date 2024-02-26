@@ -3,18 +3,18 @@
 #endif
 
 #include <avr/io.h>
-#include <avr/interrupt.h>
+//#include <avr/interrupt.h>
 
 #define   SET_BIT(Reg, Bit) (Reg |=  (1 << (Bit)))
 #define CLEAR_BIT(Reg, Bit) (Reg &= ~(1 << (Bit)))
 #define  FLIP_BIT(Reg, Bit) (Reg ^=  (1 << (Bit)))
 #define  TEST_BIT(Reg, Bit) ((Reg >> (Bit)) & 1)
 
-volatile int data = 0;
+volatile char data = 0;
 
 void SPI_SlaveInit(void) {
     // Set MISO as output
-    SET_BIT(DDRB,DDB4);
+    SET_BIT(DDRB,PB4);
     // Enable SPI
     SET_BIT(SPCR, SPE);
     // Enable SPI interupts
@@ -23,28 +23,29 @@ void SPI_SlaveInit(void) {
     
 }
 
-/*
+
 char SPI_Receive(void) {
     // Wait for reception to complete
     while(!(SPSR & (1<<SPIF))) {}
     //return data register
     return SPDR;
 }
-*/
+/*
 ISR (SPI_STC_vect){
     data = SPDR;
     FLIP_BIT(PORTB,PB1);
 }
+*/
 
 int main(void) {
 
     SPI_SlaveInit();
-    sei();
-    SET_BIT(DDRB,DDB0);
-    SET_BIT(DDRB,DDB1); // Test LED
+    //sei();
+    SET_BIT(DDRB,PB0);
+    SET_BIT(DDRB,PB1); // Test LED
     // try an spi interupt
     while (1) {
-        //data = (int) SPI_Receive;
+        data = SPI_Receive;
         if (data == 1) {
             SET_BIT(PORTB,PB0);
         }
