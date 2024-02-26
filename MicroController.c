@@ -28,6 +28,7 @@ char SPI_Receive(void) {
     // Wait for reception to complete
     while(!(SPSR & (1<<SPIF))) {}
     //return data register
+    FLIP_BIT(PORTB,PB1);
     return SPDR;
 }
 /*
