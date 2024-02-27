@@ -35,7 +35,7 @@ int main(void) {
     SET_BIT(DDRB,PB0);
     while (1) {
         data = SPI_Receive();
-        if (data == 1) {
+        if (data == 49) {
             FLIP_BIT(PORTB,PB0);
         }
         /*
