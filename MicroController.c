@@ -33,16 +33,16 @@ int main(void) {
 
     SPI_SlaveInit();
     SET_BIT(DDRB,PB0);
+    SET_BIT(DDRB,PB1);
     while (1) {
         data = SPI_Receive();
-        if (data == 49) {
-            FLIP_BIT(PORTB,PB0);
-        }
-        /*
+        if (data == 1) {
+            SET_BIT(PORTB,PB0);
+        }      
         else {
             CLEAR_BIT(PORTB,PB0);
+            FLIP_BIT(PORTB,PB1);
         }
-        */
     }
 
 
