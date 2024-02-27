@@ -36,11 +36,13 @@ int main(void) {
     while (1) {
         data = SPI_Receive();
         if (data == 1) {
-            SET_BIT(PORTB,PB0);
+            FLIP_BIT(PORTB,PB0);
         }
+        /*
         else {
             CLEAR_BIT(PORTB,PB0);
         }
+        */
     }
 
 
