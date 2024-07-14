@@ -4,6 +4,7 @@
 
 #include <avr/io.h>
 //#include <avr/interrupt.h>
+#include <util/delay.h>
 
 #define   SET_BIT(Reg, Bit) (Reg |=  (1 << (Bit)))
 #define CLEAR_BIT(Reg, Bit) (Reg &= ~(1 << (Bit)))
@@ -39,6 +40,7 @@ int main(void) {
         data = SPI_Receive();
         if (data == 1) {
             SET_BIT(PORTB,PB0);
+             _delay_ms(1000);
         }      
         else {
             CLEAR_BIT(PORTB,PB0);
