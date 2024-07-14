@@ -6,7 +6,7 @@ import spidev
 bus = 0
 
 # Chip select pin
-device = 1
+device = 0
 
 # Enable spi
 spi = spidev.SpiDev()
