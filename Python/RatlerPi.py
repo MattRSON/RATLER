@@ -15,7 +15,7 @@ spi = spidev.SpiDev()
 spi.open(bus, device)
 
 # Set the SPI speed and mode
-spi.max_speed_hz = 62500 #1Mhz
+spi.max_speed_hz = 38400 #1Mhz
 spi.mode = 0
 
 while(1):
