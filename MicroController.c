@@ -24,7 +24,7 @@ void SPI_SlaveInit(void) {
 
 char SPI_Receive(void) {
     // Wait for reception to complete
-    //SPDR = 0x10;
+    SPDR = 0x10;
 
     while(!(SPSR & (1<<SPIF))) {}
     //return data register
