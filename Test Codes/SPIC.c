@@ -10,8 +10,8 @@ int main(){
     if (gpioInitialise()<0) return -1;
 
 
-    unsigned char DataTX = 1;
-    unsigned char DataRX;
+    unsigned char DataTX[1] = 1;
+    unsigned char DataRX[1];
     int handle = spiOpen(1, 1000000, 0);
 
 
