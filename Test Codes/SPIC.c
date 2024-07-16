@@ -19,6 +19,7 @@ int main(){
 
     while(1){
         spiXfer(handle, DataTX, DataRX, 1);
+        sprintf(DataRX)
         sleep(1);
     }
    
