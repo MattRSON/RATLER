@@ -88,74 +88,8 @@ int main(){
         spiRead(handle, Data, 2);
         gpioWrite(Select1, 1);
         BulkData[0] = (Data[0]*256)+Data[1];
+
         /*
-        gpioWrite(Select2, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select2, 1);
-        BulkData[1] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select3, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select3, 1);
-        BulkData[2] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select4, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select4, 1);
-        BulkData[3] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select5, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select5, 1);
-        BulkData[4] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select6, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select6, 1);
-        BulkData[5] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select7, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select7, 1);
-        BulkData[6] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select8, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select8, 1);
-        BulkData[7] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select9, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select9, 1);
-        BulkData[8] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select10, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select10, 1);
-        BulkData[9] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select11, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select11, 1);
-        BulkData[10] = (Data[0]*256)+Data[1];
-
-        gpioWrite(Select12, 0);
-        //sleep(1e-6);
-        spiRead(handle, Data,2);
-        gpioWrite(Select12, 1);
-        BulkData[11] = (Data[0]*256)+Data[1];
-        */
-        
         
         fprintf(fp, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",BulkData[0],BulkData[1],BulkData[2],BulkData[3],BulkData[4],BulkData[5],BulkData[6],BulkData[7],BulkData[8],BulkData[9],BulkData[10],BulkData[11]);
         //fwrite(BulkData,16,12,fp);
@@ -176,6 +110,7 @@ int main(){
         // }
         // printf("\n");
         // sleep(1);
+        */
     }
    
 
