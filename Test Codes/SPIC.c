@@ -1,27 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <bcm2835.h>
+#include <bcm2711.h>
 
 int main(int argc, char** argv) {
 
- if (!bcm2835_init()) {
+ if (!bcm2711_init()) {
   return 1;
  }
- if (!bcm2835_spi_begin()) {
+ if (!bcm2711_spi_begin()) {
   return 1;
  }
 
- bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);
- bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);
- bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_65536);
- bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
- bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);
+ bcm2711_spi_setBitOrder(BCM2711_SPI_BIT_ORDER_MSBFIRST);
+ bcm2711_spi_setDataMode(BCM2711_SPI_MODE0);
+ bcm2711_spi_setClockDivider(BCM2711_SPI_CLOCK_DIVIDER_65536);
+ bcm2711_spi_chipSelect(BCM2711_SPI_CS0);
+ bcm2711_spi_setChipSelectPolarity(BCM2711_SPI_CS0, LOW);
 
- uint8_t read_data = bcm2835_spi_transfer(0xAA);
+ uint8_t read_data = bcm2711_spi_transfer(0xAA);
 
  if( read_data== 0xAA) printf("data received correctly");
 
- bcm2835_spi_end();
- bcm2835_close();
+ bcm2711_spi_end();
+ bcm2711_close();
  return (EXIT_SUCCESS);
 }
