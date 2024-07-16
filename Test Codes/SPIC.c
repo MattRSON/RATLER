@@ -15,6 +15,7 @@ int main(){
     int handle = spiOpen(0, 1000000, 0);
 
     DataTX[0] = 1;
+    DataRX[0] = 10;
 
     while(1){
         spiXfer(handle, DataTX, DataRX, 1);
