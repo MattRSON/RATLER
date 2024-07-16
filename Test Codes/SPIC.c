@@ -12,13 +12,14 @@ int main(){
 
     unsigned char DataTX[1];
     unsigned char DataRX[1];
-    int handle = spiOpen(0, 1000000, 0);
+    int handle = spiOpen(1, 6000000, 0);
 
     DataTX[0] = 1;
     DataRX[0] = 10;
+    unsigned char Data[2];
 
     while(1){
-        spiXfer(handle, DataTX, DataRX, 1);
+        spiread(handle, Data, 2);
         printf("%d", DataRX);
         sleep(1);
     }
