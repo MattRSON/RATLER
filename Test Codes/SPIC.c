@@ -19,7 +19,7 @@ int main(){
     unsigned char Data[2];
 
     while(1){
-        spiread(handle, Data, 2);
+        spiRead(handle, Data, 2);
         printf("%d", DataRX);
         sleep(1);
     }
