@@ -88,7 +88,7 @@ int main(){
         spiRead(handle, Data, 2);
         gpioWrite(Select1, 1);
         BulkData[0] = (Data[0]*256)+Data[1];
-        
+        /*
         gpioWrite(Select2, 0);
         //sleep(1e-6);
         spiRead(handle, Data,2);
@@ -154,7 +154,7 @@ int main(){
         spiRead(handle, Data,2);
         gpioWrite(Select12, 1);
         BulkData[11] = (Data[0]*256)+Data[1];
-
+        */
         
         
         fprintf(fp, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",BulkData[0],BulkData[1],BulkData[2],BulkData[3],BulkData[4],BulkData[5],BulkData[6],BulkData[7],BulkData[8],BulkData[9],BulkData[10],BulkData[11]);
