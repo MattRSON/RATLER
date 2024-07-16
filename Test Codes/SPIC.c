@@ -1,27 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <bcm2711.h>
+#include <pigpio.h>
+#include <unistd.h>
+#include <time.h>
+#include <string.h>
 
-int main(int argc, char** argv) {
+int main(){
+    // Init gpio
+    if (gpioInitialise()<0) return -1;
 
- if (!bcm2711_init()) {
-  return 1;
- }
- if (!bcm2711_spi_begin()) {
-  return 1;
- }
 
- bcm2711_spi_setBitOrder(BCM2711_SPI_BIT_ORDER_MSBFIRST);
- bcm2711_spi_setDataMode(BCM2711_SPI_MODE0);
- bcm2711_spi_setClockDivider(BCM2711_SPI_CLOCK_DIVIDER_65536);
- bcm2711_spi_chipSelect(BCM2711_SPI_CS0);
- bcm2711_spi_setChipSelectPolarity(BCM2711_SPI_CS0, LOW);
+    unsigned char DataTX = 1;
+    unsigned char DataRX;
+    int handle = spiOpen(1, 1000000, 0);
 
- uint8_t read_data = bcm2711_spi_transfer(0xAA);
 
- if( read_data== 0xAA) printf("data received correctly");
+    while(1){
+        spiXfer(handle, DataTX, DataRX, 1);
+        sleep(1);
+    }
+   
 
- bcm2711_spi_end();
- bcm2711_close();
- return (EXIT_SUCCESS);
+    // Terminate the library
+    fclose(fp);
+    spiClose(handle);
+    gpioTerminate();
+    return 0;
 }
