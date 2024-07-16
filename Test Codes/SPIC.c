@@ -82,12 +82,12 @@ int main(){
 
     while(1){
         //printf("0x%02X", Data[0]); // This is for debugging 
-        clock_gettime(CLOCK_REALTIME, &begin);
-        gpioWrite(Select1, 0);
+        //clock_gettime(CLOCK_REALTIME, &begin);
+        //gpioWrite(Select1, 0);
         //sleep(1e-6);
         spiRead(handle, Data, 2);
-        gpioWrite(Select1, 1);
-        BulkData[0] = (Data[0]*256)+Data[1];
+        //gpioWrite(Select1, 1);
+        //BulkData[0] = (Data[0]*256)+Data[1];
     }
    
 
