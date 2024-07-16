@@ -19,7 +19,7 @@ int main(){
 
     while(1){
         spiXfer(handle, DataTX, DataRX, 1);
-        sprintf(DataRX)
+        printf("%d", DataRX);
         sleep(1);
     }
    
