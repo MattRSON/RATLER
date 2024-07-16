@@ -48,7 +48,7 @@ int main(){
 
     unsigned char Data[2];
     uint16_t BulkData[12];
-    int handle = spiOpen(1, 6000000, 0);
+    int handle = spiOpen(0, 6000000, 0);
     // Set pins as outputs
     gpioSetMode(Select1, PI_OUTPUT);
     gpioSetMode(Select2, PI_OUTPUT);
@@ -88,29 +88,6 @@ int main(){
         spiRead(handle, Data, 2);
         gpioWrite(Select1, 1);
         BulkData[0] = (Data[0]*256)+Data[1];
-
-        /*
-        
-        fprintf(fp, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",BulkData[0],BulkData[1],BulkData[2],BulkData[3],BulkData[4],BulkData[5],BulkData[6],BulkData[7],BulkData[8],BulkData[9],BulkData[10],BulkData[11]);
-        //fwrite(BulkData,16,12,fp);
-
-        clock_gettime(CLOCK_REALTIME, &end);
-        double seconds = end.tv_sec - begin.tv_sec;
-        double nanoseconds = end.tv_nsec - begin.tv_nsec;
-        double elapsed = seconds + nanoseconds*1e-9;
-
-        if (elapsed < .0001){
-            sleep(.0001-elapsed);
-        } else {
-            printf("Shits Fucked %f\n",elapsed);
-        }
-        //printf("Time measured: %f seconds.\n", elapsed);
-        // for (int i = 0; i < 12; i++) {
-        //     printf("%d ", BulkData[i]);
-        // }
-        // printf("\n");
-        // sleep(1);
-        */
     }
    
 
