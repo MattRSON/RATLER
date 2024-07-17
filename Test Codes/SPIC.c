@@ -50,6 +50,7 @@ int main(){
     uint16_t BulkData[12];
     int handle = spiOpen(0, 6000000, 0);
     // Set pins as outputs
+    /*
     gpioSetMode(Select1, PI_OUTPUT);
     gpioSetMode(Select2, PI_OUTPUT);
     gpioSetMode(Select3, PI_OUTPUT);
@@ -66,7 +67,7 @@ int main(){
     // Writes all the pins high
     struct timespec begin, end; 
     
-    
+    /*
     gpioWrite(Select1, 1);
     gpioWrite(Select2, 1);
     gpioWrite(Select3, 1);
@@ -79,15 +80,10 @@ int main(){
     gpioWrite(Select10, 1);
     gpioWrite(Select11, 1);
     gpioWrite(Select12, 1);
+    */
 
     while(1){
-        //printf("0x%02X", Data[0]); // This is for debugging 
-        //clock_gettime(CLOCK_REALTIME, &begin);
-        //gpioWrite(Select1, 0);
-        //sleep(1e-6);
         spiRead(handle, Data, 2);
-        //gpioWrite(Select1, 1);
-        //BulkData[0] = (Data[0]*256)+Data[1];
     }
    
 
