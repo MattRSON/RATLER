@@ -17,7 +17,7 @@ int main(){
     int input;
 
     while(1){
-        printf("Enter Instructions\n")
+        printf("Enter Instructions\n");
         scanf("%d", &input);
 
         DataTX[0] = input;
