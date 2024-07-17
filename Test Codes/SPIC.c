@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 
+/*
 #define Select1 2
 #define Select2 3
 #define Select3 4
@@ -20,11 +21,12 @@
 #define Select12 25
 
 FILE *fp;
-
+*/
 int main(){
     // Init gpio
     if (gpioInitialise()<0) return -1;
 
+/*
     time_t rawtime;
     struct tm *timeinfo;
     char datetime_str[20]; // This will hold the formatted datetime string
@@ -44,43 +46,11 @@ int main(){
 
     strcat(datetime_str,".csv");
     fp = fopen(datetime_str, "a");
-
+*/
 
     unsigned char Data[2];
-    uint16_t BulkData[12];
+    // uint16_t BulkData[12];
     int handle = spiOpen(0, 6000000, 0);
-    // Set pins as outputs
-    /*
-    gpioSetMode(Select1, PI_OUTPUT);
-    gpioSetMode(Select2, PI_OUTPUT);
-    gpioSetMode(Select3, PI_OUTPUT);
-    gpioSetMode(Select4, PI_OUTPUT);
-    gpioSetMode(Select5, PI_OUTPUT);
-    gpioSetMode(Select6, PI_OUTPUT);
-    gpioSetMode(Select7, PI_OUTPUT);
-    gpioSetMode(Select8, PI_OUTPUT);
-    gpioSetMode(Select9, PI_OUTPUT);
-    gpioSetMode(Select10, PI_OUTPUT);
-    gpioSetMode(Select11, PI_OUTPUT);
-    gpioSetMode(Select12, PI_OUTPUT);
-
-    // Writes all the pins high
-    struct timespec begin, end; 
-    
-    /*
-    gpioWrite(Select1, 1);
-    gpioWrite(Select2, 1);
-    gpioWrite(Select3, 1);
-    gpioWrite(Select4, 1);
-    gpioWrite(Select5, 1);
-    gpioWrite(Select6, 1);
-    gpioWrite(Select7, 1);
-    gpioWrite(Select8, 1);
-    gpioWrite(Select9, 1);
-    gpioWrite(Select10, 1);
-    gpioWrite(Select11, 1);
-    gpioWrite(Select12, 1);
-    */
 
     while(1){
         spiRead(handle, Data, 2);
@@ -88,7 +58,7 @@ int main(){
    
 
     // Terminate the library
-    fclose(fp);
+    //fclose(fp);
     spiClose(handle);
     gpioTerminate();
     return 0;
