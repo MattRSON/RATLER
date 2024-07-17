@@ -15,10 +15,14 @@ int main(){
     unsigned char DataRX[1];
     int handle = spiOpen(0, 6000000, 0);
 
-    DataTX[0] = 0;
 
     while(1){
+        DataTX[0] = 0;
         spiXfer(handle, DataTX, DataRX, 1);
+        sleep(1);
+        DataTX[0] = 1;
+        spiXfer(handle, DataTX, DataRX, 1);
+        sleep(1);
     }
    
 
