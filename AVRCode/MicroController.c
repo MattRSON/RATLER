@@ -40,10 +40,9 @@ int main(void) {
         data = SPI_Receive();
         if (data == 1) {
             SET_BIT(PORTB,PB0);
-        }      
-        else if (data == 0) {
+        }   
+        else if (data == 2) {
             CLEAR_BIT(PORTB,PB0);
-            
         }
     }
 
