@@ -41,7 +41,7 @@ int main(void) {
         if (data == 1) {
             SET_BIT(PORTB,PB0);
         }      
-        else {
+        else if (data == 0) {
             CLEAR_BIT(PORTB,PB0);
             
         }
