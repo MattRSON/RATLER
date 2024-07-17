@@ -11,11 +11,14 @@ int main(){
     // Init gpio
     if (gpioInitialise()<0) return -1;
 
-    unsigned char Data[1];
+    unsigned char DataTX[1];
+    unsigned char DataRX[1];
     int handle = spiOpen(0, 6000000, 0);
 
+    DataTX[0] = 0;
+
     while(1){
-        spiRead(handle, Data, 1);
+        spiXfer(handle, DataTX, DataRX, 1);
     }
    
 
