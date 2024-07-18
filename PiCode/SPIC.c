@@ -17,22 +17,22 @@ int main(){
     int input;
 
     while(1){
-        printf("Enter Instructions\n");
-        scanf("%d", &input);
+        // printf("Enter Instructions\n");
+        // scanf("%d", &input);
 
-        DataTX[0] = input;
-        spiXfer(handle, DataTX, DataRX, 1);
-        sleep(1);
+        // DataTX[0] = input;
+        // spiXfer(handle, DataTX, DataRX, 1);
+        // sleep(1);
 
 
-        /*
+        
         DataTX[0] = 0;
         spiXfer(handle, DataTX, DataRX, 1);
         sleep(1);
         DataTX[0] = 1;
         spiXfer(handle, DataTX, DataRX, 1);
         sleep(1);
-        */
+        
     }
    
 
