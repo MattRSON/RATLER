@@ -13,7 +13,7 @@ int main(){
 
     unsigned char DataTX[1];
     unsigned char DataRX[1];
-    int handle = spiOpen(0, 9600, 0);
+    int handle = spiOpen(0, 262144, 0);
     int input;
 
     while(1){
