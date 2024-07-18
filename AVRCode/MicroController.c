@@ -33,7 +33,7 @@ char SPI_Receive(int Rx) {
 
 
 int main(void) {
-    int Send = 0;
+    int Send = 0x34;
 
     SPI_SlaveInit();
     SET_BIT(DDRB,PB0);
