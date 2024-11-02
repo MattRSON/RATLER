@@ -32,11 +32,12 @@ char SPI_Receive(int Rx) {
 }
 
 
-int main(void) {
+void main(void) {
     int Send = 0x34;
 
     SPI_SlaveInit();
     SET_BIT(DDRB,PB0);
+    SET_BIT(PORTB,PB0);
     while (1) {
         data = SPI_Receive(Send);
         if (data == 0x80) {
