@@ -39,7 +39,7 @@ int main(void) {
     SET_BIT(DDRB,PB0);
     while (1) {
         data = SPI_Receive(Send);
-        if (data == 0x01) {
+        if (data == 0x80) {
             SET_BIT(PORTB,PB0);
             Send = 0xFF;
         }   
