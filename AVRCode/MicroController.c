@@ -3,17 +3,17 @@ Spi communication discription
 Key value pairs each with 8 bits
 
 keys for Rpi to avr
-00000000 Keep alive
-00000001 Motor1 Forward Speed
-00000010 Motor1 Reverse Speed
-00000011 Motor2 Forward Speed
-00000100 Motor2 Reverse Speed
-00000101 Motor3 Forward Speed
-00000110 Motor3 Reverse Speed
-00000111 Motor4 Forward Speed
-00001000 Motor4 Reverse Speed
-00001001 Power Motors
-00001010 Debug dump
+10000000 Keep alive
+10000001 Motor1 Forward Speed
+10000010 Motor1 Reverse Speed
+10000011 Motor2 Forward Speed
+10000100 Motor2 Reverse Speed
+10000101 Motor3 Forward Speed
+10000110 Motor3 Reverse Speed
+10000111 Motor4 Forward Speed
+10001000 Motor4 Reverse Speed
+10001001 Power Motors
+10001010 Debug dump
 
 
 keys for avr to Rpi
@@ -44,7 +44,8 @@ keys for avr to Rpi
 #define  FLIP_BIT(Reg, Bit) (Reg ^=  (1 << (Bit)))
 #define  TEST_BIT(Reg, Bit) ((Reg >> (Bit)) & 1)
 
-volatile char data = 0;
+volatile uint8_t key = 0;
+volatile uint8_t value = 0;
 volatile char flag = 0;
 
 void SPI_SlaveInit(void) {
@@ -69,18 +70,21 @@ void SPI_SlaveInit(void) {
 
 
 int main(void) {
-    char subdata = 0x0;;
+    char subkey = 0x0;
+    char subvalue = 0x0;
     SPI_SlaveInit();
     SET_BIT(DDRB,PB0);
 
     while (1) {
         if (flag) {
             cli();
-            subdata = data;
+            subkey = key;
+            subvalue = value;
             sei();
+            flag = 0;
         }
 
-        if (subdata == 0x01) {
+        if (subkey == 0xFF) {
             SET_BIT(PORTB,PB0);
             SPDR = 0xFF; 
         } 
@@ -96,7 +100,14 @@ int main(void) {
 //SPIE flag for interrupt
 ISR(SPI_STC_vect)
 {
-    data = SPDR;
+
+    char data = SPDR;
+    if (TEST_BIT(data,7)) {
+        key = data;
+    }
+    else {
+        value = data;
+    }
     flag = 1;
 
 }
