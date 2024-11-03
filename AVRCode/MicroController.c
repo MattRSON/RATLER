@@ -21,10 +21,10 @@ void SPI_SlaveInit(void) {
     
 }
 
-//int Rx
-char SPI_Receive() {
+
+char SPI_Receive(int Rx) {
     // Wait for reception to complete
-    //SPDR = Rx;
+    SPDR = Rx;
 
     while(!(SPSR & (1<<SPIF))) {}
     //return data register
@@ -33,24 +33,22 @@ char SPI_Receive() {
 
 
 int main(void) {
-    //int Send = 0x34;
+    int Send = 0x34;
 
     SPI_SlaveInit();
     SET_BIT(DDRB,PB0);
-    SET_BIT(PORTB,PB0);
 
     while (1) {
-        data = SPI_Receive();//(Send);
-        if (data == 0x80) {
+        data = SPI_Receive(Send);
+        if (data == 0x01) {
             SET_BIT(PORTB,PB0);
-            SPDR = 0xFF; 
+            Send = 0xFF; 
         } 
         else {
             CLEAR_BIT(PORTB,PB0);
-            SPDR = 0x12;
+            Send = 0x12;
         }
     }
-    return 0;
 
 
 }
