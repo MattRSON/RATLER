@@ -12,7 +12,7 @@ keys for Rpi to avr
 10000110 Motor3 Reverse Speed
 10000111 Motor4 Forward Speed
 10001000 Motor4 Reverse Speed
-10001001 Power Motors
+10001001 Turn on Motors
 10001010 Debug dump
 
 
@@ -53,20 +53,14 @@ void SPI_SlaveInit(void) {
     SET_BIT(DDRB,PB4);
     // Enable SPI
     SET_BIT(SPCR, SPE);
+    // Enable SPI interrupt
     SET_BIT(SPCR,SPIE);
+
+    // Enable Global interrupt
     sei();
     
 }
 
-
-// char SPI_Receive(int Rx) {
-//     // Wait for reception to complete
-//     SPDR = Rx;
-
-//     while(!(SPSR & (1<<SPIF))) {}
-//     //return data register
-//     return SPDR;
-// }
 
 
 int main(void) {
