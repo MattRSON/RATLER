@@ -1,0 +1,106 @@
+\t (00:00:01) allegro 17.4 P001 Windows SPB 64-bit Edition
+\t (00:00:01)     Journal start - Tue Jan  9 17:51:37 2024
+\t (00:00:01)         Host=DESKTOP-35D4VR0 User=Mathew Pid=13944 CPUs=8
+\t (00:00:01) CmdLine= c:\cadence\spb_17.4\tools\bin\allegro.exe C:\Users\Mathew\OneDrive\Documents\GitHub\RATLER\Board_RATLER\Controller China\Controller.brd
+\t (00:00:01) 
+   (00:00:01) Loading axlcore.cxt 
+\t (00:00:01) Opening existing design...
+\i (00:00:01) QtSignal SPBFoldDockArea FoldAreaTabWidget currentChanged Controller
+\d (00:00:01) Design opened: C:/Users/Mathew/OneDrive/Documents/GitHub/RATLER/Board_RATLER/Controller China/Controller.brd
+\t (00:00:01) Grids are drawn 32.00, 32.00 apart for enhanced viewing.
+\i (00:00:01) trapsize 3525
+\i (00:00:01) trapsize 3722
+\t (00:00:02) Grids are drawn 64.00, 64.00 apart for enhanced viewing.
+\i (00:00:02) trapsize 4558
+\i (00:00:02) trapsize 4558
+\t (00:00:02) Grids are drawn 16.00, 16.00 apart for enhanced viewing.
+\i (00:00:02) trapsize 1301
+\i (00:00:04) generaledit 
+\i (00:00:08) artwork 
+\i (00:00:10) setwindow form.film_control
+\i (00:00:10) FORM film_control filmtree  Outline 
+\i (00:00:15) FORM film_control filmtree  Top_Soldermask 
+\i (00:00:23) FORM film_control filmtree  Bottom_Soldermask 
+\i (00:00:24) FORM film_control filmtree  BOTTOM 
+\i (00:00:33) FORM film_control filmtree  TOP 
+\i (00:00:35) FORM film_control filmtree  Top_Silkscreen 
+\i (00:01:49) FORM film_control filmtree  'VIA CLASS/TOP' TOP 
+\i (00:01:50) FORM film_control filmtree  Outline 
+\i (00:01:51) FORM film_control filmtree  PIN/SOLDERMASK_BOTTOM Bottom_Soldermask 
+\i (00:01:53) FORM film_control filmtree  BOTTOM 
+\i (00:01:54) FORM film_control filmtree  Bottom_Soldermask 
+\i (00:01:55) FORM film_control filmtree  Outline 
+\i (00:02:02) setwindow pcb
+\i (00:02:02) zoom out 1 
+\i (00:02:02) setwindow pcb
+\i (00:02:02) zoom out 5300.06 1063.99
+\t (00:02:02) Grids are drawn 32.00, 32.00 apart for enhanced viewing.
+\i (00:02:02) trapsize 2601
+\i (00:02:02) zoom out 1 
+\i (00:02:02) setwindow pcb
+\i (00:02:02) zoom out 4714.93 2127.98
+\t (00:02:02) Grids are drawn 64.00, 64.00 apart for enhanced viewing.
+\i (00:02:02) trapsize 4332
+\i (00:02:03) zoom in 1 
+\i (00:02:03) setwindow pcb
+\i (00:02:03) zoom in 4306.32 5597.35
+\t (00:02:03) Grids are drawn 32.00, 32.00 apart for enhanced viewing.
+\i (00:02:03) trapsize 2166
+\i (00:02:03) zoom in 1 
+\i (00:02:03) setwindow pcb
+\i (00:02:03) zoom in 4306.32 5597.35
+\t (00:02:03) Grids are drawn 16.00, 16.00 apart for enhanced viewing.
+\i (00:02:03) trapsize 1083
+\i (00:02:03) zoom in 1 
+\i (00:02:03) setwindow pcb
+\i (00:02:03) zoom in 4418.96 5463.06
+\t (00:02:03) Grids are drawn 8.00, 8.00 apart for enhanced viewing.
+\i (00:02:03) trapsize 542
+\i (00:02:03) zoom in 1 
+\i (00:02:03) setwindow pcb
+\i (00:02:03) zoom in 4418.96 5463.06
+\t (00:02:03) Grids are drawn 4.00, 4.00 apart for enhanced viewing.
+\i (00:02:03) trapsize 271
+\i (00:02:03) zoom in 1 
+\i (00:02:03) setwindow pcb
+\i (00:02:03) zoom in 4418.96 5463.06
+\t (00:02:03) Grids are drawn 2.00, 2.00 apart for enhanced viewing.
+\i (00:02:03) trapsize 135
+\i (00:02:04) zoom in 1 
+\i (00:02:04) setwindow pcb
+\i (00:02:04) zoom in 4418.96 5463.06
+\i (00:02:04) trapsize 68
+\i (00:02:06) zoom out 1 
+\i (00:02:06) setwindow pcb
+\i (00:02:06) zoom out 4417.48 5475.11
+\i (00:02:06) trapsize 135
+\i (00:02:06) zoom out 1 
+\i (00:02:06) setwindow pcb
+\i (00:02:06) zoom out 4417.47 5475.12
+\t (00:02:06) Grids are drawn 4.00, 4.00 apart for enhanced viewing.
+\i (00:02:06) trapsize 271
+\i (00:02:07) zoom out 1 
+\i (00:02:07) setwindow pcb
+\i (00:02:07) zoom out 4399.07 5471.32
+\t (00:02:07) Grids are drawn 8.00, 8.00 apart for enhanced viewing.
+\i (00:02:07) trapsize 542
+\i (00:02:07) zoom out 1 
+\i (00:02:07) setwindow pcb
+\i (00:02:07) zoom out 4383.90 5468.08
+\t (00:02:07) Grids are drawn 16.00, 16.00 apart for enhanced viewing.
+\i (00:02:07) trapsize 1083
+\i (00:02:07) zoom out 1 
+\i (00:02:07) setwindow pcb
+\i (00:02:07) zoom out 4379.57 5468.08
+\t (00:02:07) Grids are drawn 32.00, 32.00 apart for enhanced viewing.
+\i (00:02:07) trapsize 2166
+\i (00:02:25) setwindow form.film_control
+\i (00:02:25) FORM film_control filmtree  Top_Silkscreen 
+\i (00:02:47) FORM film_control filmtree  Bottom_Soldermask 
+\i (00:02:48) FORM film_control filmtree  Outline 
+\i (00:02:50) FORM film_control filmtree  Top_Soldermask 
+\i (03:01:33) setwindow pcb
+\i (03:01:33) exit 
+\e (03:01:33) Do you want to save the changes you made to Controller.brd?
+\i (03:01:37) fillin no 
+\t (03:01:37)     Journal end - Tue Jan  9 20:53:13 2024
