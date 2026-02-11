@@ -47,6 +47,7 @@ keys for avr to Rpi
 volatile uint8_t key = 0;
 volatile uint8_t value = 0;
 volatile char flag = 0;
+volatile char keyflag = 0;
 
 void SPI_SlaveInit(void) {
     // Set MISO as output
@@ -98,11 +99,13 @@ ISR(SPI_STC_vect)
 {
 
     char data = SPDR;
-    if (TEST_BIT(data,7)) {
+    if (keyflag == 0) {
         key = data;
+        keyflag = 1;
     }
     else {
         value = data;
+        keyflag = 0;
     }
     flag = 1;
 
