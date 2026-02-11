@@ -65,7 +65,7 @@ void SPI_SlaveInit(void) {
 
 int main(void) {
     char subkey = 0x0;
-    //char subvalue = 0x0;
+    char subvalue = 0x0;
     SPI_SlaveInit();
     SET_BIT(DDRB,PB0);
 
@@ -73,22 +73,21 @@ int main(void) {
         if (flag) {
             cli();
             subkey = key;
-            //subvalue = value;
+            subvalue = value;
             sei();
             flag = 0;
         }
 
         if (subkey == 0xFF) {
             SET_BIT(PORTB,PB0);
-            SPDR = 0xFF; 
+            //SPDR = value; 
         } 
         else if (subkey == 0xFE) {
             CLEAR_BIT(PORTB,PB0);
-            SPDR = 0x12;
+            //SPDR = 0x12;
         }
-        else {
-            SPDR = 0x00;
-        }
+        
+        SPDR = subvalue;
     }
 
 
