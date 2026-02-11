@@ -46,6 +46,8 @@ keys for avr to Rpi
 
 volatile uint8_t key = 0;
 volatile uint8_t value = 0;
+volatile uint8_t avrkey = 0;
+volatile uint8_t avrvalue = 0;
 volatile char flag = 0;
 volatile char keyflag = 0;
 
@@ -82,14 +84,20 @@ int main(void) {
         if (subkey == 0xFF && subvalue == 0xFF) {
             SET_BIT(PORTB,PB0);
             //SPDR = value; 
-            subkey = 0x00;
+            subkey = 0x00; // Clear the subkey and subvalue after processing
             subvalue = 0x00;
+
+            avrkey = 0x21;
+            avrvalue = 0x34;
         } 
         else if (subkey == 0xFF && subvalue == 0x01) {
             CLEAR_BIT(PORTB,PB0);
             //SPDR = 0x12;
-            subkey = 0x00;
+            subkey = 0x00; // Clear the subkey and subvalue after processing
             subvalue = 0x00;
+
+            avrkey = 0xFF;
+            avrvalue = 0xE4;
         }
         
         SPDR = subvalue;
@@ -106,10 +114,12 @@ ISR(SPI_STC_vect)
     if (keyflag == 0) {
         key = data;
         keyflag = 1;
+        SPDR = avrkey;
     }
     else {
         value = data;
         keyflag = 0;
+        SPDR = avrvalue;
     }
     flag = 1;
 
