@@ -9,7 +9,16 @@ and make from gnumin32
 Flashing on rpi4
 sudo avrdude -p atmega328p -C /etc/avrdude_gpio.conf -c RATLER -v -U flash:w:MicroController.hex:i
 
-
+Serial Pinout
+1
+2 Yellow
+3 MOSI
+4 SCK
+5 GND
+6 MISO
+7 5V
+8 Chip Select
+9 Reset
 
 AVR side things to add
 - spi communication
