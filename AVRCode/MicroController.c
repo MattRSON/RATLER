@@ -85,7 +85,7 @@ int main(void) {
             subkey = 0x00;
             subvalue = 0x00;
         } 
-        else if (subkey == 0xFF && subvalue == 0x00) {
+        else if (subkey == 0xFF && subvalue == 0x01) {
             CLEAR_BIT(PORTB,PB0);
             //SPDR = 0x12;
             subkey = 0x00;
