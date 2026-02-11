@@ -100,7 +100,7 @@ int main(void) {
             avrvalue = 0xE4;
         }
         
-        SPDR = subvalue;
+        
     }
 
 
