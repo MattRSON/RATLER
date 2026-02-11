@@ -82,7 +82,7 @@ int main(void) {
             SET_BIT(PORTB,PB0);
             SPDR = 0xFF; 
         } 
-        else {
+        if (subkey == 0xFE) {
             CLEAR_BIT(PORTB,PB0);
             SPDR = 0x12;
         }
