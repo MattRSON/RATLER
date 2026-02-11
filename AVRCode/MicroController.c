@@ -49,7 +49,7 @@ volatile uint8_t value = 0;
 volatile uint8_t avrkey = 0;
 volatile uint8_t avrvalue = 0;
 volatile char flag = 0;
-volatile char keyflag = 0;
+//volatile char keyflag = 0;
 
 void SPI_SlaveInit(void) {
     // Set MISO as output
@@ -81,7 +81,7 @@ int main(void) {
             flag = 0;
         }
 
-        if (subkey == 0xFF && subvalue == 0xFF) {
+        if (subkey == 0xFF && subvalue == 0x7F) {
             SET_BIT(PORTB,PB0);
             //SPDR = value; 
             subkey = 0x00; // Clear the subkey and subvalue after processing
@@ -111,14 +111,14 @@ ISR(SPI_STC_vect)
 {
 
     char data = SPDR;
-    if (keyflag == 0) {
+    if (TEST_BIT(data,7) == 1) {
         key = data;
-        keyflag = 1;
+        //keyflag = 1;
         SPDR = avrkey;
     }
     else {
         value = data;
-        keyflag = 0;
+        //keyflag = 0;
         SPDR = avrvalue;
     }
     flag = 1;
