@@ -79,13 +79,17 @@ int main(void) {
             flag = 0;
         }
 
-        if (subkey == 0xFF) {
+        if (subkey == 0xFF && subvalue == 0xFF) {
             SET_BIT(PORTB,PB0);
             //SPDR = value; 
+            subkey = 0x00;
+            subvalue = 0x00;
         } 
-        else if (subkey == 0xFE) {
+        else if (subkey == 0xFF && subvalue == 0x00) {
             CLEAR_BIT(PORTB,PB0);
             //SPDR = 0x12;
+            subkey = 0x00;
+            subvalue = 0x00;
         }
         
         SPDR = subvalue;
