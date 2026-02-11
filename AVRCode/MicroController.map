@@ -2,8 +2,6 @@ Archive member included to satisfy reference by file (symbol)
 
 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_exit.o)
                               c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o (exit)
-c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
-                              MicroController.o (__do_clear_bss)
 
 Discarded input sections
 
@@ -28,22 +26,6 @@ Discarded input sections
                 0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_exit.o)
- .text          0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .data          0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .bss           0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc.mul
-                0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc.div
-                0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc.prologue
-                0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc.builtins
-                0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc.fmul
-                0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc.fixed
-                0x0000000000000000        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
 
 Memory Configuration
 
@@ -168,7 +150,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x106
+.text           0x0000000000000000       0xb0
  *(.vectors)
  .vectors       0x0000000000000000       0x68 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
                 0x0000000000000000                __vector_default
@@ -209,8 +191,6 @@ END GROUP
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x0000000000000074       0x10 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_clear_bss.o)
-                0x0000000000000074                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -221,51 +201,46 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000000000000084        0x8 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
+ .init9         0x0000000000000074        0x8 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
  *(.init9)
  *(.text)
- .text          0x000000000000008c        0x4 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
-                0x000000000000008c                __vector_22
-                0x000000000000008c                __vector_1
-                0x000000000000008c                __vector_24
-                0x000000000000008c                __vector_12
-                0x000000000000008c                __bad_interrupt
-                0x000000000000008c                __vector_6
-                0x000000000000008c                __vector_3
-                0x000000000000008c                __vector_23
-                0x000000000000008c                __vector_25
-                0x000000000000008c                __vector_11
-                0x000000000000008c                __vector_13
-                0x000000000000008c                __vector_19
-                0x000000000000008c                __vector_7
-                0x000000000000008c                __vector_5
-                0x000000000000008c                __vector_4
-                0x000000000000008c                __vector_9
-                0x000000000000008c                __vector_2
-                0x000000000000008c                __vector_21
-                0x000000000000008c                __vector_15
-                0x000000000000008c                __vector_8
-                0x000000000000008c                __vector_14
-                0x000000000000008c                __vector_10
-                0x000000000000008c                __vector_16
-                0x000000000000008c                __vector_18
-                0x000000000000008c                __vector_20
-                0x0000000000000090                . = ALIGN (0x2)
+ .text          0x000000000000007c        0x4 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
+                0x000000000000007c                __vector_22
+                0x000000000000007c                __vector_1
+                0x000000000000007c                __vector_24
+                0x000000000000007c                __vector_12
+                0x000000000000007c                __bad_interrupt
+                0x000000000000007c                __vector_6
+                0x000000000000007c                __vector_3
+                0x000000000000007c                __vector_23
+                0x000000000000007c                __vector_25
+                0x000000000000007c                __vector_11
+                0x000000000000007c                __vector_13
+                0x000000000000007c                __vector_17
+                0x000000000000007c                __vector_19
+                0x000000000000007c                __vector_7
+                0x000000000000007c                __vector_5
+                0x000000000000007c                __vector_4
+                0x000000000000007c                __vector_9
+                0x000000000000007c                __vector_2
+                0x000000000000007c                __vector_21
+                0x000000000000007c                __vector_15
+                0x000000000000007c                __vector_8
+                0x000000000000007c                __vector_14
+                0x000000000000007c                __vector_10
+                0x000000000000007c                __vector_16
+                0x000000000000007c                __vector_18
+                0x000000000000007c                __vector_20
+                0x0000000000000080                . = ALIGN (0x2)
  *(.text.*)
- .text.SPI_SlaveInit
-                0x0000000000000090       0x12 MicroController.o
-                0x0000000000000090                SPI_SlaveInit
  .text.startup.main
-                0x00000000000000a2       0x32 MicroController.o
-                0x00000000000000a2                main
- .text.__vector_17
-                0x00000000000000d4       0x2e MicroController.o
-                0x00000000000000d4                __vector_17
-                0x0000000000000102                . = ALIGN (0x2)
+                0x0000000000000080       0x2c MicroController.o
+                0x0000000000000080                main
+                0x00000000000000ac                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000000102        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_exit.o)
-                0x0000000000000102                _exit
-                0x0000000000000102                exit
+ .fini9         0x00000000000000ac        0x0 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_exit.o)
+                0x00000000000000ac                _exit
+                0x00000000000000ac                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -284,11 +259,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000000102        0x4 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000000000000ac        0x4 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000000000000106                _etext = .
+                0x00000000000000b0                _etext = .
 
-.data           0x0000000000800100        0x0 load address 0x0000000000000106
+.data           0x0000000000800100        0x0 load address 0x00000000000000b0
                 [!provide]                        PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -300,26 +275,20 @@ END GROUP
                 0x0000000000800100                _edata = .
                 [!provide]                        PROVIDE (__data_end, .)
 
-.bss            0x0000000000800100        0x3
-                0x0000000000800100                PROVIDE (__bss_start, .)
+.bss            0x0000000000800100        0x0
+                [!provide]                        PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.flag      0x0000000000800100        0x1 MicroController.o
-                0x0000000000800100                flag
- .bss.value     0x0000000000800101        0x1 MicroController.o
-                0x0000000000800101                value
- .bss.key       0x0000000000800102        0x1 MicroController.o
-                0x0000000000800102                key
  *(COMMON)
-                0x0000000000800103                PROVIDE (__bss_end, .)
-                0x0000000000000106                __data_load_start = LOADADDR (.data)
-                0x0000000000000106                __data_load_end = (__data_load_start + SIZEOF (.data))
+                [!provide]                        PROVIDE (__bss_end, .)
+                0x00000000000000b0                __data_load_start = LOADADDR (.data)
+                0x00000000000000b0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0000000000800103        0x0
+.noinit         0x0000000000800100        0x0
                 [!provide]                        PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                        PROVIDE (__noinit_end, .)
-                0x0000000000800103                _end = .
+                0x0000000000800100                _end = .
                 [!provide]                        PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
@@ -384,42 +353,42 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000       0x30
+.debug_aranges  0x0000000000000000       0x20
  *(.debug_aranges)
  .debug_aranges
-                0x0000000000000000       0x30 MicroController.o
+                0x0000000000000000       0x20 MicroController.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0x72e
+.debug_info     0x0000000000000000      0x740
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x13a MicroController.o
+ .debug_info    0x00000000000005f4      0x14c MicroController.o
 
-.debug_abbrev   0x0000000000000000      0x66c
+.debug_abbrev   0x0000000000000000      0x68e
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2       0xca MicroController.o
+ .debug_abbrev  0x00000000000005a2       0xec MicroController.o
 
-.debug_line     0x0000000000000000      0x164
+.debug_line     0x0000000000000000      0x12c
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000       0x1a c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_line    0x000000000000001a      0x14a MicroController.o
+ .debug_line    0x000000000000001a      0x112 MicroController.o
 
-.debug_frame    0x0000000000000000       0x54
+.debug_frame    0x0000000000000000       0x24
  *(.debug_frame)
- .debug_frame   0x0000000000000000       0x54 MicroController.o
+ .debug_frame   0x0000000000000000       0x24 MicroController.o
 
-.debug_str      0x0000000000000000      0x370
+.debug_str      0x0000000000000000      0x387
  *(.debug_str)
  .debug_str     0x0000000000000000      0x208 c:/users/mattr/onedrive/documents/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_str     0x0000000000000208      0x168 MicroController.o
-                                        0x1a7 (size before relaxing)
+ .debug_str     0x0000000000000208      0x17f MicroController.o
+                                        0x1b3 (size before relaxing)
 
-.debug_loc      0x0000000000000000       0x8d
+.debug_loc      0x0000000000000000       0x48
  *(.debug_loc)
- .debug_loc     0x0000000000000000       0x8d MicroController.o
+ .debug_loc     0x0000000000000000       0x48 MicroController.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -439,9 +408,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000       0x20
+.debug_ranges   0x0000000000000000       0x10
  *(.debug_ranges)
- .debug_ranges  0x0000000000000000       0x20 MicroController.o
+ .debug_ranges  0x0000000000000000       0x10 MicroController.o
 
 .debug_macro
  *(.debug_macro)
