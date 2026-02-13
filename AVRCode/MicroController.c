@@ -104,8 +104,8 @@ void PWM_Init(void) {
     // Set prescaler to 64 and start the timer
     TCCR0B = (1 << CS01) | (1 << CS00);
 
-    OCR0A = 100;
-    OCR0B = 50;
+    OCR0A = 0;
+    OCR0B = 0;
 }
 
 void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
