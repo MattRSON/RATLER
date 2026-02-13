@@ -4,14 +4,14 @@ Key value pairs each with 8 bits
 
 keys for Rpi to avr
 10000000 Keep alive
-10000001 Motor1 Forward Speed 0x81
-10100001 Motor1 Reverse Speed 0xA1
-10000010 Motor2 Forward Speed 0x82
-10100010 Motor2 Reverse Speed 0xA2
-10000011 Motor3 Forward Speed 0x83
-10100011 Motor3 Reverse Speed 0xA3
-10000100 Motor4 Forward Speed 0x84
-10100100 Motor4 Reverse Speed 0xA4
+11000001 Motor1 Forward Speed 0xC1
+11100001 Motor1 Reverse Speed 0xE1
+11000010 Motor2 Forward Speed 0xC2
+11100010 Motor2 Reverse Speed 0xE2
+11000011 Motor3 Forward Speed 0xC3
+11100011 Motor3 Reverse Speed 0xE3
+11000100 Motor4 Forward Speed 0xC4
+11100100 Motor4 Reverse Speed 0xE4
 10001001 Turn on Motors 0x89
 10001010 Debug dump 0x8A
 
@@ -30,18 +30,35 @@ keys for avr to Rpi
 11110101 Motor Current 3
 11110100 Motor Current 4
 
-Pin mapping
-ADC0 - Battery Voltage
-ADC1 - 12V rail
-ADC2 - 5V rail
-ADC3 - 3.3V rail
-To start use just the one timer for PWM, Testing other pin PWM outputs on the same timer later
-D3 - Motor enabler ??
+Pin mapping Atmega 328p
+B0 - Read motor driver overtemp
+B1
+B2 - Chip select for SPI
+B3 - SPI MOSI
+B4 - SPI MISO
+B5 - SPI SCK
+B6
+B7
+C0 - ADC0 - Battery Voltage
+C1 - ADC1 - 12V rail
+C2 - ADC2 - 5V rail
+C3 - ADC3 - 3.3V rail
+C4 - ADC4 - Motor 1 Current
+C5 - ADC5 - Motor 2 Current
+C6 - Reset
+ADC6 - Motor 3 Current
+ADC7 - Motor 4 Current
+D0
+D1
+D2
+D3 - Motor Brake
 D4 - Motor 1 Direction
 D5 - Motor 1 PWM
 D6 - Motor 2 PWM
 D7 - Motor 2 Direction
-B0 - Read motor driver overtemp
+
+To start use just the one timer for PWM, Testing other pin PWM outputs on the same timer later
+
 
 
 
@@ -77,11 +94,77 @@ void SPI_SlaveInit(void) {
     sei();
     
 }
+
+void PWM_Init(void) {
+    // Set Timer0 to Fast PWM mode, non-inverting output on OC0A and OC0B
+    SET_BIT(DDRD, PD6); // OC0A pin as output motor 1 and 3 PWM
+    SET_BIT(DDRD, PD5); // OC0B pin as output motor 2 and 4 PWM
+    TCCR0A = (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0B1);
+    // Set prescaler to 64 and start the timer
+    TCCR0B = (1 << CS01) | (1 << CS00);
+}
+
 void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
-    // Placeholder function to control motors
     // motor: 1-4, dir: 0x00 for forward, 0x20 for reverse, speed: 0-127
     // Speed controlled by PWM, so we can use the speed value to set the duty cycle of the PWM signal for the corresponding motor
+    switch (motor)
+    {
+    case 1:
+        // direction control
+        if (dir == 0x00) {
+            // Set direction pin for motor 1 to forward
+            SET_BIT(PORTD, PD4);
+        } else {
+            // Set direction pin for motor 1 to reverse
+            CLEAR_BIT(PORTD, PD4);
+        }
 
+        // speed control
+        OCR0A = speed; // Assuming motor 1 is controlled by Timer0 PWM on OC0A (PD6)
+
+        break;
+    case 2:
+        // direction control
+        if (dir == 0x00) {
+            // Set direction pin for motor 2 to forward
+            SET_BIT(PORTD, PD7);
+        } else {
+            // Set direction pin for motor 2 to reverse
+            CLEAR_BIT(PORTD, PD7);
+        }
+        // speed control
+        OCR0B = speed; // Assuming motor 2 is controlled by Timer0 PWM on OC0B (PD5)
+
+        break;
+    case 3:
+        // direction control
+        if (dir == 0x00) {
+            // Set direction pin for motor 3 to forward
+            SET_BIT(PORTD, PD4); // Example pin, change as needed
+        } else {
+            // Set direction pin for motor 3 to reverse
+            CLEAR_BIT(PORTD, PD4); // Example pin, change as needed
+        }
+        // speed control
+        OCR0A = speed; // Assuming motor 3 is controlled by Timer1 PWM on OC0A (PD6), change as needed
+
+        break;
+    case 4:
+        // direction control
+        if (dir == 0x00) {
+            // Set direction pin for motor 4 to forward
+            SET_BIT(PORTD, PD7); // Example pin, change as needed
+        } else {
+            // Set direction pin for motor 4 to reverse
+            CLEAR_BIT(PORTD, PD7); // Example pin, change as needed
+        }
+        // speed control
+        OCR0B = speed; // Assuming motor 4 is controlled by Timer1 PWM on OC0B (PD5), change as needed 
+
+        break;
+    default:
+        break;
+    }
 
 }
 
@@ -91,7 +174,11 @@ int main(void) {
     char subkey = 0x0;
     char subvalue = 0x0;
     SPI_SlaveInit();
+    PWM_Init();
     SET_BIT(DDRB,PB0);
+    SET_BIT(DDRD,PD4); // Motor 1 and 3 direction pin
+    SET_BIT(DDRD,PD7); // Motor 2 and 4 direction pin
+
 
     while (1) {
         if (flag) {
@@ -122,7 +209,7 @@ int main(void) {
         }
 
         // Motor control
-        if (subkey & 0x80) {
+        if ((subkey & 0xC0) == 0x80) {
             uint8_t motor = subkey & 0x0F; // Extract motor number (1-4)
             uint8_t dir   = subkey & 0x20; // 0x00 for forward, 0x20 for reverse
 
