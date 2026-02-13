@@ -18,7 +18,7 @@ int main(){
 
     while(1){
         printf("Enter Instructions\n");
-        scanf("%d", &input);
+        scanf("%i", &input);
 
         DataTX[0] = input;
         spiXfer(handle, DataTX, DataRX, 1);
