@@ -101,7 +101,7 @@ void PWM_Init(void) {
     SET_BIT(DDRD, PD5); // OC0B pin as output motor 2 and 4 PWM
     TCCR0A = (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0B1);
     // Set prescaler to 64 and start the timer
-    TCCR0B = (1 << CS01) | (1 << CS00);
+    TCCR0B = (1 << CS01); //| (1 << CS00);
 
     OCR0A = 0;
     OCR0B = 0;
