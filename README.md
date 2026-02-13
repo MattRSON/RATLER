@@ -11,12 +11,12 @@ sudo avrdude -p atmega328p -C /etc/avrdude_gpio.conf -c RATLER -v -U flash:w:Mic
 
 Serial Pinout
 1
-2 Yellow
+2 5V
 3 MOSI
 4 SCK
 5 GND
 6 MISO
-7 5V
+7 3.3V
 8 Chip Select
 9 Reset
 
