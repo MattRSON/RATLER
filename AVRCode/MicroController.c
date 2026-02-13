@@ -12,7 +12,7 @@ keys for Rpi to avr
 11100011 Motor3 Reverse Speed 0xE3
 11000100 Motor4 Forward Speed 0xC4
 11100100 Motor4 Reverse Speed 0xE4
-10001001 Turn on Motors 0x89
+10001001 Brake 0x89
 10001010 Debug dump 0x8A
 
 
@@ -197,7 +197,7 @@ int main(void) {
             SET_BIT(PORTB,PB0);
             //SPDR = value; 
             subkey = 0x00; // Clear the subkey and subvalue after processing
-            subvalue = 0x00;
+            subvalue = 0xFF;
 
             avrkey = 0x21; // Send back something as a test
             avrvalue = 0x34;
@@ -206,14 +206,14 @@ int main(void) {
             CLEAR_BIT(PORTB,PB0);
             //SPDR = 0x12;
             subkey = 0x00; // Clear the subkey and subvalue after processing
-            subvalue = 0x00;
+            subvalue = 0xFF;
 
             avrkey = 0xFF; // Send back something as a test
             avrvalue = 0xE4;
         }
 
         // Motor control
-        if ((subkey & 0xC0) == 0xC0) {
+        if ((subkey & 0xC0) == 0xC0 && subvalue != 0xFF) { // Check if the key is a motor control command and value is not zero 
             uint8_t motor = subkey & 0x0F; // Extract motor number (1-4)
             uint8_t dir   = subkey & 0x20; // 0x00 for forward, 0x20 for reverse
 
@@ -222,7 +222,7 @@ int main(void) {
             //avrkey = 0xFE;
             //avrvalue = subkey;
             subkey = 0x00; // Clear the subkey and subvalue after processing
-            subvalue = 0x00; 
+            subvalue = 0xFF; 
             
         }
     }
