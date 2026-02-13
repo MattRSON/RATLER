@@ -99,12 +99,13 @@ void PWM_Init(void) {
     // Set Timer0 to Fast PWM mode, non-inverting output on OC0A and OC0B
     SET_BIT(DDRD, PD6); // OC0A pin as output motor 1 and 3 PWM
     SET_BIT(DDRD, PD5); // OC0B pin as output motor 2 and 4 PWM
+
     TCCR0A = (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0B1);
     // Set prescaler to 64 and start the timer
-    TCCR0B = (1 << CS01); //| (1 << CS00);
+    TCCR0B = (1 << CS01) | (1 << CS00);
 
-    OCR0A = 0;
-    OCR0B = 0;
+    OCR0A = 100;
+    OCR0B = 50;
 }
 
 void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
