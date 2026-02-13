@@ -214,14 +214,16 @@ int main(void) {
 
         // Motor control
         if ((subkey & 0xC0) == 0xC0) {
-            //uint8_t motor = subkey & 0x0F; // Extract motor number (1-4)
-            //uint8_t dir   = subkey & 0x20; // 0x00 for forward, 0x20 for reverse
+            uint8_t motor = subkey & 0x0F; // Extract motor number (1-4)
+            uint8_t dir   = subkey & 0x20; // 0x00 for forward, 0x20 for reverse
 
-            //set_motor(motor, dir, subvalue);
+            set_motor(motor, dir, subvalue*2); // Scale speed value to 0-255 for PWM duty cycle
 
             //avrkey = 0xFE;
             //avrvalue = subkey;
-            OCR0A = subvalue; // Example: set PWM duty cycle based on subvalue, change as needed
+            subkey = 0x00; // Clear the subkey and subvalue after processing
+            subvalue = 0x00; 
+            
         }
     }
 }
