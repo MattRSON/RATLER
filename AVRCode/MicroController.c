@@ -186,6 +186,25 @@ int main(void) {
 
     while (1) {
         // Everytime we get a new key or value both key and values are refreshed causing both speeds to update.
+        switch (flag)
+        {
+        case 1:
+            cli();
+            subkey = key;
+            sei();
+            flag = 0;
+            break;
+        case 2:
+            cli();
+            subvalue = value;
+            sei();
+            flag = 0;
+            break;
+        
+        default:
+            break;
+        }
+        /*
         if (flag == 1) {
             cli();
             subkey = key;
