@@ -221,7 +221,7 @@ int main(void) {
 
             //avrkey = 0xFE;
             //avrvalue = subkey;
-            OCR0A = subkey; // Example: set PWM duty cycle based on subkey, change as needed
+            OCR0A = subvalue; // Example: set PWM duty cycle based on subvalue, change as needed
         }
     }
 }
