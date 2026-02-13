@@ -213,7 +213,7 @@ int main(void) {
         }
 
         // Motor control
-        if ((subkey & 0xC0) == 0x80) {
+        if ((subkey & 0xC0) == 0xC0) {
             //uint8_t motor = subkey & 0x0F; // Extract motor number (1-4)
             //uint8_t dir   = subkey & 0x20; // 0x00 for forward, 0x20 for reverse
 
