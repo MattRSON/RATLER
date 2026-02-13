@@ -185,14 +185,20 @@ int main(void) {
 
 
     while (1) {
-        if (flag) {
+        // Everytime we get a new key or value both key and values are refreshed causing both speeds to update.
+        if (flag == 1) {
             cli();
             subkey = key;
+            sei();
+            flag = 0;
+        }
+        else if (flag == 2) {
+            cli();
             subvalue = value;
             sei();
             flag = 0;
         }
-
+        /*
         if (subkey == 0xFF && subvalue == 0x7F) {
             SET_BIT(PORTB,PB0);
             //SPDR = value; 
@@ -211,6 +217,7 @@ int main(void) {
             avrkey = 0xFF; // Send back something as a test
             avrvalue = 0xE4;
         }
+            */
 
         // Motor control
         if ((subkey & 0xF0) == 0xC0 && subvalue != 0xFF) { // Check if the key is a motor control command and value is not the default 0xFF 
@@ -237,12 +244,13 @@ ISR(SPI_STC_vect)
     // All keys have the MSB set to 1, while values have the MSB set to 0
     if (TEST_BIT(data,7) == 1) {
         key = data;
+        flag = 1;
         SPDR = avrkey;
     }
     else {
         value = data;
+        flag = 2;
         SPDR = avrvalue;
     }
-    flag = 1;
 
 }
