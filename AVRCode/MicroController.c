@@ -5,13 +5,13 @@ Key value pairs each with 8 bits
 keys for Rpi to avr
 10000000 Keep alive
 11000001 Motor1 Forward Speed 0xC1
-11100001 Motor1 Reverse Speed 0xE1
+11001001 Motor1 Reverse Speed 0xC9
 11000010 Motor2 Forward Speed 0xC2
-11100010 Motor2 Reverse Speed 0xE2
+11001010 Motor2 Reverse Speed 0xCA
 11000011 Motor3 Forward Speed 0xC3
-11100011 Motor3 Reverse Speed 0xE3
+11001011 Motor3 Reverse Speed 0xCB
 11000100 Motor4 Forward Speed 0xC4
-11100100 Motor4 Reverse Speed 0xE4
+11001100 Motor4 Reverse Speed 0xCC
 10001001 Brake 0x89
 10001010 Debug dump 0x8A
 
@@ -175,8 +175,8 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
 
 
 int main(void) {
-    char subkey = 0x0;
-    char subvalue = 0x0;
+    char subkey = 0x00;
+    char subvalue = 0xFF;
     SPI_SlaveInit();
     PWM_Init();
     SET_BIT(DDRB,PB0);
@@ -213,9 +213,9 @@ int main(void) {
         }
 
         // Motor control
-        if ((subkey & 0xC0) == 0xC0 && subvalue != 0xFF) { // Check if the key is a motor control command and value is not zero 
-            uint8_t motor = subkey & 0x0F; // Extract motor number (1-4)
-            uint8_t dir   = subkey & 0x20; // 0x00 for forward, 0x20 for reverse
+        if ((subkey & 0xF0) == 0xC0 && subvalue != 0xFF) { // Check if the key is a motor control command and value is not the default 0xFF 
+            uint8_t motor = subkey & 0x07; // Extract motor number (1-4)
+            uint8_t dir   = subkey & 0x08; // 0x00 for forward, 0x08 for reverse
 
             set_motor(motor, dir, subvalue*2); // Scale speed value to 0-255 for PWM duty cycle
 
