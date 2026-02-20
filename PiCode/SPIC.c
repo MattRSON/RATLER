@@ -1,5 +1,4 @@
-// udp_server.c
-
+//UDP Server listening for drive instructions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,9 +7,9 @@
 #include <sys/socket.h>
 #include <sys/time.h>
 
-#define PORT 5000
+#define PORT 5000 //UDP port
 #define PACKET_SIZE 5
-#define TIMEOUT_MS 200
+#define TIMEOUT_MS 200 //Timeout after disconnection
 
 int main() {
     int sockfd;
@@ -39,22 +38,20 @@ int main() {
         if (n == PACKET_SIZE) {
             gettimeofday(&last_packet, NULL);
 
-            int8_t m1 = (int8_t)buffer[0];
-            int8_t m2 = (int8_t)buffer[1];
-            int8_t m3 = (int8_t)buffer[2];
-            int8_t m4 = (int8_t)buffer[3];
+            int8_t x1 = (int8_t)buffer[0];
+            int8_t y1 = (int8_t)buffer[1];
+            int8_t x2 = (int8_t)buffer[2];
+            int8_t y2 = (int8_t)buffer[3];
             uint8_t buttons = buffer[4];
 
-            printf("M1:%d M2:%d M3:%d M4:%d BTN:%u\n",
-                   m1, m2, m3, m4, buttons);
+            printf("X1:%d Y1:%d X2:%d Y2:%d BTN:%u\n", x1, y1, x2, y2, buttons);
 
             // TODO: forward to SPI here
         }
 
         gettimeofday(&now, NULL);
         long elapsed_ms =
-            (now.tv_sec - last_packet.tv_sec) * 1000 +
-            (now.tv_usec - last_packet.tv_usec) / 1000;
+            (now.tv_sec - last_packet.tv_sec) * 1000 + (now.tv_usec - last_packet.tv_usec) / 1000;
 
         if (elapsed_ms > TIMEOUT_MS) {
             // Watchdog: stop motors
