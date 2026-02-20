@@ -1,20 +1,11 @@
 import socket
 
-UDP_IP = "192.168.1.75"
-UDP_PORT = 5000
+RPi_IP = "192.168.1.75"   # <-- put your Pi IP here
+PORT = 5000
 
-# Create a UDP socket
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Bind the socket to the port
-sock.bind((UDP_IP, UDP_PORT))
+message = "Hello from Steam Deck"
+sock.sendto(message.encode(), (RPi_IP, PORT))
 
-print(f"Listening for UDP packets on {UDP_IP}:{UDP_PORT}")
-
-while True:
-    # Receive data and client address
-    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-    print(f"Received message from {addr}: {data.decode('utf-8')}")
-    # Optional: send a response back
-    sock.sendto(b"Message received", addr)
+print("Message sent!")

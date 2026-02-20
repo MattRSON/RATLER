@@ -1,39 +1,40 @@
-// server program for udp connection
+// simple_udp_server.c
+
 #include <stdio.h>
-#include <strings.h>
-#include <sys/types.h>
+#include <string.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include<netinet/in.h>
+#include <unistd.h>
+
 #define PORT 5000
-#define MAXLINE 1000
 
-// Driver code
-int main()
-{   
-    char buffer[100];
-    char *message = "Hello Client";
-    int listenfd, len;
-    struct sockaddr_in servaddr, cliaddr;
-    bzero(&servaddr, sizeof(servaddr));
+int main() {
+    int sockfd;
+    char buffer[1024];
+    struct sockaddr_in server_addr, client_addr;
+    socklen_t addr_len = sizeof(client_addr);
 
-    // Create a UDP Socket
-    listenfd = socket(AF_INET, SOCK_DGRAM, 0);        
-    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(PORT);
-    servaddr.sin_family = AF_INET; 
- 
-    // bind server address to socket descriptor
-    bind(listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr));
-     
-    //receive the datagram
-    len = sizeof(cliaddr);
-    int n = recvfrom(listenfd, buffer, sizeof(buffer),
-            0, (struct sockaddr*)&cliaddr,&len); //receive message from server
-    buffer[n] = '\0';
-    puts(buffer);
-         
-    // send the response
-    sendto(listenfd, message, strlen(message), 0,
-          (struct sockaddr*)&cliaddr, sizeof(cliaddr));
+    // Create socket
+    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+
+    // Setup server address
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(PORT);
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+
+    // Bind socket
+    bind(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr));
+
+    printf("Waiting for message on port %d...\n", PORT);
+
+    // Receive message
+    int n = recvfrom(sockfd, buffer, sizeof(buffer)-1, 0,
+                     (struct sockaddr*)&client_addr, &addr_len);
+
+    buffer[n] = '\0';   // Null-terminate
+
+    printf("Received: %s\n", buffer);
+
+    close(sockfd);
+    return 0;
 }
