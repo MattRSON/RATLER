@@ -22,13 +22,13 @@ while True:
     pygame.event.pump()
 
     # Example stick values
-    x1 = joystick.get_axis(0)
-    y1 = joystick.get_axis(1)
-    x2 = joystick.get_axis(4)
-    y2 = joystick.get_axis(3)
+    x1 = int(joystick.get_axis(0)*127)
+    y1 = int(joystick.get_axis(1)*127)
+    x2 = int(joystick.get_axis(4)*127)
+    y2 = int(joystick.get_axis(3)*127)
     buttons = 0b00000001
 
-    packet = struct.pack("eeeeB", x1, y1, x2, y2, buttons)
+    packet = struct.pack("bbbbB", x1, y1, x2, y2, buttons)
 
     sock.sendto(packet, (RPi_HOST, PORT))
 
