@@ -11,9 +11,10 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Initialize pygame and the joystick module
 pygame.init()
-pygame.joystick.init()
+pygame.controller.init()
 
-joystick = pygame.joystick.Joystick(0)
+#joystick = pygame.joystick.Joystick(0)
+joystick = pygame.controller.Controller(0)
 joystick.init()
 print(f"Detected Joystick: {joystick.get_name()}")
 
@@ -32,10 +33,10 @@ while True:
 
     #sock.sendto(packet, (RPi_HOST, PORT))
 
-    left_x_axis = joystick.get_axis(0)
-    left_y_axis = joystick.get_axis(1)
-    right_x_axis = joystick.get_axis(2)
-    right_y_axis = joystick.get_axis(3)
+    left_x_axis = joystick.get_axis(pygame.CONTROLLER_AXIS_LEFTX)
+    left_y_axis = joystick.get_axis(pygame.CONTROLLER_AXIS_LEFTY)
+    right_x_axis = joystick.get_axis(pygame.CONTROLLER_AXIS_RIGHTX)
+    right_y_axis = joystick.get_axis(pygame.CONTROLLER_AXIS_RIGHTY)
             
     # Axis values range from -1.0 to 1.0
     print(f"Left Stick X: {left_x_axis:>6.3f}, Y: {left_y_axis:>6.3f} | Right Stick X: {right_x_axis:>6.3f}, Y: {right_y_axis:>6.3f}")
