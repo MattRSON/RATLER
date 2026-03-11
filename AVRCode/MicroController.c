@@ -52,10 +52,10 @@ D0
 D1
 D2
 D3 - Motor Brake
-D4 - Motor 1 Direction
-D5 - Motor 1 PWM
-D6 - Motor 2 PWM
-D7 - Motor 2 Direction
+D4 - Motor 1 Direction (left)
+D5 - Motor 1 PWM (left)
+D6 - Motor 2 PWM (right)
+D7 - Motor 2 Direction (right)
 
 To start use just the one timer for PWM, Testing other pin PWM outputs on the same timer later
 
@@ -97,8 +97,8 @@ void SPI_SlaveInit(void) {
 
 void PWM_Init(void) {
     // Set Timer0 to Fast PWM mode, non-inverting output on OC0A and OC0B
-    SET_BIT(DDRD, PD6); // OC0A pin as output motor 1 and 3 PWM
-    SET_BIT(DDRD, PD5); // OC0B pin as output motor 2 and 4 PWM
+    SET_BIT(DDRD, PD6); // OC0A pin as output motor 2 and 4 PWM
+    SET_BIT(DDRD, PD5); // OC0B pin as output motor 1 and 3 PWM
 
     TCCR0A = (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0B1);
     // Set prescaler to 64 and start the timer
@@ -124,7 +124,7 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
         }
 
         // speed control
-        OCR0A = speed; // Assuming motor 1 is controlled by Timer0 PWM on OC0A (PD6)
+        OCR0B = speed; // Assuming motor 1 is controlled by Timer0 PWM on OC0A (PD6)
 
         break;
     case 2:
@@ -137,7 +137,7 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
             CLEAR_BIT(PORTD, PD7);
         }
         // speed control
-        OCR0B = speed; // Assuming motor 2 is controlled by Timer0 PWM on OC0B (PD5)
+        OCR0A = speed; // Assuming motor 2 is controlled by Timer0 PWM on OC0B (PD5)
 
         break;
     case 3:
@@ -150,7 +150,7 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
             CLEAR_BIT(PORTD, PD4); // Example pin, change as needed
         }
         // speed control
-        OCR0A = speed; // Assuming motor 3 is controlled by Timer1 PWM on OC0A (PD6), change as needed
+        OCR0B = speed; // Assuming motor 3 is controlled by Timer1 PWM on OC0A (PD6), change as needed
 
         break;
     case 4:
@@ -163,7 +163,7 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
             CLEAR_BIT(PORTD, PD7); // Example pin, change as needed
         }
         // speed control
-        OCR0B = speed; // Assuming motor 4 is controlled by Timer1 PWM on OC0B (PD5), change as needed 
+        OCR0A = speed; // Assuming motor 4 is controlled by Timer1 PWM on OC0B (PD5), change as needed 
 
         break;
     default:
