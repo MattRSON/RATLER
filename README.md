@@ -8,6 +8,7 @@ and make from gnumin32
 
 Flashing on rpi4
 scp Microcontroller.hex pi@RATLER:/home/pi/RATLER/AVR/Microcontroller.hex
+
 sudo avrdude -p atmega328p -C /etc/avrdude_gpio.conf -c RATLER -v -U flash:w:MicroController.hex:i
 
 Serial Pinout
