@@ -8,7 +8,7 @@
 #include <sys/time.h>
 
 #define PORT 5000 //UDP port
-#define PACKET_SIZE 5
+#define PACKET_SIZE 7 //Size of the packet sent from the Steam Deck (x1, y1, x2, y2, L2, R2, buttons)
 #define TIMEOUT_MS 200 //Timeout after disconnection
 
 int main() {
