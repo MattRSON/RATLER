@@ -183,7 +183,6 @@ int main(void) {
     SET_BIT(DDRD,PD4); // Motor 1 and 3 direction pin
     SET_BIT(DDRD,PD7); // Motor 2 and 4 direction pin
 
-
     while (1) {
         // Check if a new key or value has been received from the SPI interrupt and update the subkey or subvalue accordingly
         if (flag == 1) {
@@ -198,26 +197,6 @@ int main(void) {
             sei();
             flag = 0;
         }
-        /*
-        if (subkey == 0xFF && subvalue == 0x7F) {
-            SET_BIT(PORTB,PB0);
-            //SPDR = value; 
-            subkey = 0x00; // Clear the subkey and subvalue after processing
-            subvalue = 0xFF;
-
-            avrkey = 0x21; // Send back something as a test
-            avrvalue = 0x34;
-        } 
-        else if (subkey == 0xFF && subvalue == 0x01) {
-            CLEAR_BIT(PORTB,PB0);
-            //SPDR = 0x12;
-            subkey = 0x00; // Clear the subkey and subvalue after processing
-            subvalue = 0xFF;
-
-            avrkey = 0xFF; // Send back something as a test
-            avrvalue = 0xE4;
-        }
-            */
 
         // Motor control
         if ((subkey & 0xF0) == 0xC0 && subvalue != 0xFF) { // Check if the key is a motor control command and value is not the default 0xFF 
