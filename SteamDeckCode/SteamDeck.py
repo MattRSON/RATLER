@@ -42,7 +42,7 @@ while True:
     
     #buttons = 0b00000001
 
-    packet = struct.pack("bbbbBBBBB", x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons)
+    packet = struct.pack("bbbbBBBbb", x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons)
 
     sock.sendto(packet, (RPi_HOST, PORT))
 
