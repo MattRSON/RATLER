@@ -8,7 +8,7 @@
 #include <sys/time.h>
 
 #define PORT 5000 //UDP port
-#define PACKET_SIZE 7 //Size of the packet sent from the Steam Deck (x1, y1, x2, y2, L2, R2, buttons)
+#define PACKET_SIZE 9 //Size of the packet sent from the Steam Deck (x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons)
 #define TIMEOUT_MS 200 //Timeout after disconnection
 
 int main() {
@@ -44,9 +44,11 @@ int main() {
             int8_t y2 = (int8_t)buffer[3];
             uint8_t L2 = buffer[4];
             uint8_t R2 = buffer[5];
-            uint8_t buttons = buffer[6];
+            int8_t dpad_x = (int8_t)buffer[6];
+            int8_t dpad_y = (int8_t)buffer[7];
+            uint8_t buttons = buffer[8];
 
-            printf("X1:%d Y1:%d X2:%d Y2:%d L2:%u R2:%u BTN:%u\n", x1, y1, x2, y2, L2, R2, buttons);
+            printf("X1:%d Y1:%d X2:%d Y2:%d L2:%u R2:%u DPX:%d DPY:%d BTN:%u\n", x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons);
 
             // TODO: forward to SPI here
         }
