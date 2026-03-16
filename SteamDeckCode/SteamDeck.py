@@ -26,9 +26,11 @@ while True:
     y1 = int(joystick.get_axis(1)*127)
     x2 = int(joystick.get_axis(4)*127)
     y2 = int(joystick.get_axis(3)*127)
+    L2 = int(joystick.get_axis(5)*127)
+    R2 = int(joystick.get_axis(6)*127)
     buttons = 0b00000001
 
-    packet = struct.pack("bbbbB", x1, y1, x2, y2, buttons)
+    packet = struct.pack("bbbbbbB", x1, y1, x2, y2, L2, R2, buttons)
 
     sock.sendto(packet, (RPi_HOST, PORT))
 

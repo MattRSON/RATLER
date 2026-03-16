@@ -42,9 +42,11 @@ int main() {
             int8_t y1 = (int8_t)buffer[1];
             int8_t x2 = (int8_t)buffer[2];
             int8_t y2 = (int8_t)buffer[3];
+            int8_t L2 = (int8_t)buffer[4];
+            int8_t R2 = (int8_t)buffer[5];
             uint8_t buttons = buffer[4];
 
-            printf("X1:%d Y1:%d X2:%d Y2:%d BTN:%u\n", x1, y1, x2, y2, buttons);
+            printf("X1:%d Y1:%d X2:%d Y2:%d L2:%d R2:%d BTN:%u\n", x1, y1, x2, y2, L2, R2, buttons);
 
             // TODO: forward to SPI here
         }
