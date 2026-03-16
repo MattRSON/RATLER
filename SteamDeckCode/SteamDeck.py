@@ -29,7 +29,15 @@ while True:
     L2 = int((joystick.get_axis(2)+1)*127)
     R2 = int((joystick.get_axis(5)+1)*127)
     buttons = 0
-    buttons = buttons | joystick.get_button(0) # A
+    buttons = buttons | (joystick.get_button(0) << 0) # A
+    buttons = buttons | (joystick.get_button(1) << 1) # B
+    buttons = buttons | (joystick.get_button(2) << 2) # X
+    buttons = buttons | (joystick.get_button(3) << 3) # Y
+    buttons = buttons | (joystick.get_button(4) << 4) # L
+    buttons = buttons | (joystick.get_button(5) << 5) # R
+    buttons = buttons | (joystick.get_button(6) << 6) # U
+    buttons = buttons | (joystick.get_button(7) << 7) # D
+    
 
     
     #buttons = 0b00000001
