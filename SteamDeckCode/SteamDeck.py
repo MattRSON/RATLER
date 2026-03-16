@@ -28,7 +28,10 @@ while True:
     y2 = int(joystick.get_axis(3)*127)
     L2 = int((joystick.get_axis(2)+1)*127)
     R2 = int((joystick.get_axis(5)+1)*127)
-    buttons = joystick.get_button(0)
+    buttons = 0
+    buttons = buttons | joystick.get_button(0) # A
+
+    
     #buttons = 0b00000001
 
     packet = struct.pack("bbbbBBB", x1, y1, x2, y2, L2, R2, buttons)
