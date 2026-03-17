@@ -70,17 +70,35 @@ To start use just the one timer for PWM, Testing other pin PWM outputs on the sa
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <string.h> // for memcpy
+#include <stdlib.h> // for abs
 
 #define   SET_BIT(Reg, Bit) (Reg |=  (1 << (Bit)))
 #define CLEAR_BIT(Reg, Bit) (Reg &= ~(1 << (Bit)))
 #define  FLIP_BIT(Reg, Bit) (Reg ^=  (1 << (Bit)))
 #define  TEST_BIT(Reg, Bit) ((Reg >> (Bit)) & 1)
 
-volatile uint8_t key = 0;
-volatile uint8_t value = 0;
-volatile uint8_t avrkey = 0;
-volatile uint8_t avrvalue = 0;
-volatile char flag = 0;
+#define PACKET_SIZE 6
+
+// volatile uint8_t key = 0;
+// volatile uint8_t value = 0;
+//volatile uint8_t avrkey = 0;
+//volatile uint8_t avrvalue = 0;
+//volatile char flag = 0;
+
+volatile uint8_t rx_buffer[PACKET_SIZE];
+volatile uint8_t rx_index = 0;
+
+typedef struct {
+        uint8_t sync;      // 0xAA
+        int8_t motor[4]; // Motor speed values (-127 to 127)
+        // uint8_t buttons;
+        uint8_t checksum;
+    } AVRData;
+
+volatile AVRData packet_active;
+volatile AVRData packet_shadow;
+volatile uint8_t packet_ready = 0;
 
 void SPI_SlaveInit(void) {
     // Set MISO as output
@@ -108,14 +126,14 @@ void PWM_Init(void) {
     OCR0B = 0;
 }
 
-void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
+void set_motor(uint8_t motor, uint8_t speed) {
     // motor: 1-4, dir: 0x00 for forward, 0x20 for reverse, speed: 0-127
     // Speed controlled by PWM, so we can use the speed value to set the duty cycle of the PWM signal for the corresponding motor
     switch (motor)
     {
     case 1:
         // direction control
-        if (dir == 0x00) {
+        if (speed <= 0x00) {
             // Set direction pin for motor 1 to forward
             SET_BIT(PORTD, PD4);
         } else {
@@ -124,12 +142,12 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
         }
 
         // speed control
-        OCR0B = speed; // Assuming motor 1 is controlled by Timer0 PWM on OC0A (PD6)
+        OCR0B = abs(speed)*2; // Assuming motor 1 is controlled by Timer0 PWM on OC0A (PD6)
 
         break;
     case 2:
         // direction control
-        if (dir == 0x00) {
+        if (speed <= 0x00) {
             // Set direction pin for motor 2 to forward
             SET_BIT(PORTD, PD7);
         } else {
@@ -137,12 +155,12 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
             CLEAR_BIT(PORTD, PD7);
         }
         // speed control
-        OCR0A = speed; // Assuming motor 2 is controlled by Timer0 PWM on OC0B (PD5)
+        OCR0A = abs(speed)*2; // Assuming motor 2 is controlled by Timer0 PWM on OC0B (PD5)
 
         break;
     case 3:
         // direction control
-        if (dir == 0x00) {
+        if (speed <= 0x00) {
             // Set direction pin for motor 3 to forward
             SET_BIT(PORTD, PD4); // Example pin, change as needed
         } else {
@@ -150,12 +168,12 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
             CLEAR_BIT(PORTD, PD4); // Example pin, change as needed
         }
         // speed control
-        OCR0B = speed; // Assuming motor 3 is controlled by Timer1 PWM on OC0A (PD6), change as needed
+        OCR0B = abs(speed); // Assuming motor 3 is controlled by Timer1 PWM on OC0A (PD6), change as needed
 
         break;
     case 4:
         // direction control
-        if (dir == 0x00) {
+        if (speed <= 0x00) {
             // Set direction pin for motor 4 to forward
             SET_BIT(PORTD, PD7); // Example pin, change as needed
         } else {
@@ -163,7 +181,7 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
             CLEAR_BIT(PORTD, PD7); // Example pin, change as needed
         }
         // speed control
-        OCR0A = speed; // Assuming motor 4 is controlled by Timer1 PWM on OC0B (PD5), change as needed 
+        OCR0A = abs(speed)*2; // Assuming motor 4 is controlled by Timer1 PWM on OC0B (PD5), change as needed 
 
         break;
     default:
@@ -175,30 +193,32 @@ void set_motor(uint8_t motor, uint8_t dir, uint8_t speed) {
 
 
 int main(void) {
-    char subkey = 0x00;
-    char subvalue = 0xFF;
     SPI_SlaveInit();
     PWM_Init();
-    SET_BIT(DDRB,PB0);
+//    SET_BIT(DDRB,PB0);
     SET_BIT(DDRD,PD4); // Motor 1 and 3 direction pin
     SET_BIT(DDRD,PD7); // Motor 2 and 4 direction pin
 
     while (1) {
-        // Check if a new key or value has been received from the SPI interrupt and update the subkey or subvalue accordingly
-        if (flag == 1) {
-            cli();
-            subkey = key;
-            sei();
-            flag = 0;
-        }
-        else if (flag == 2) {
-            cli();
-            subvalue = value;
-            sei();
-            flag = 0;
+        if (packet_ready) {
+
+            cli();  // disable interrupts briefly
+
+            memcpy((void*)&packet_active,(void*)&packet_shadow,sizeof(AVRData));
+
+            packet_ready = 0;
+
+            sei();  // re-enable interrupts
+
+            // Now safe to use packet_active
         }
 
         // Motor control
+        for (uint8_t i = 0; i < 2; i++) {
+            set_motor(i+1, packet_active.motor[i]);
+        }
+        //set_motor(1, packet_active.motor[0]);
+/*
         if ((subkey & 0xF0) == 0xC0 && subvalue != 0xFF) { // Check if the key is a motor control command and value is not the default 0xFF 
             uint8_t motor = subkey & 0x07; // Extract motor number (1-4)
             uint8_t dir   = subkey & 0x08; // 0x00 for forward, 0x08 for reverse
@@ -211,25 +231,31 @@ int main(void) {
             subvalue = 0xFF; 
             
         }
+        */
     }
 }
 
 //SPIE flag for interrupt
 ISR(SPI_STC_vect)
 {
+    uint8_t data = SPDR;
 
-    char data = SPDR;
-    // Check the MSB of the received data to determine if it's a key or value
-    // All keys have the MSB set to 1, while values have the MSB set to 0
-    if (TEST_BIT(data,7) == 1) {
-        key = data;
-        flag = 1;
-        SPDR = avrkey;
-    }
-    else {
-        value = data;
-        flag = 2;
-        SPDR = avrvalue;
+    static uint8_t temp_buffer[PACKET_SIZE];
+
+    if (rx_index == 0) {
+        if (data != 0xAA) return;
     }
 
+    temp_buffer[rx_index++] = data;
+
+    if (rx_index >= PACKET_SIZE) {
+
+        // Copy into shadow struct
+        memcpy((void*)&packet_shadow, temp_buffer, PACKET_SIZE);
+
+        packet_ready = 1;
+        rx_index = 0;
+    }
+
+    SPDR = 0x00;
 }
