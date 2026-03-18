@@ -195,7 +195,6 @@ void set_motor(uint8_t motor, uint8_t speed) {
 int main(void) {
     SPI_SlaveInit();
     PWM_Init();
-//    SET_BIT(DDRB,PB0);
     SET_BIT(DDRD,PD4); // Motor 1 and 3 direction pin
     SET_BIT(DDRD,PD7); // Motor 2 and 4 direction pin
 
@@ -217,21 +216,6 @@ int main(void) {
         for (uint8_t i = 0; i < 2; i++) {
             set_motor(i+1, packet_active.motor[i]);
         }
-        //set_motor(1, packet_active.motor[0]);
-/*
-        if ((subkey & 0xF0) == 0xC0 && subvalue != 0xFF) { // Check if the key is a motor control command and value is not the default 0xFF 
-            uint8_t motor = subkey & 0x07; // Extract motor number (1-4)
-            uint8_t dir   = subkey & 0x08; // 0x00 for forward, 0x08 for reverse
-
-            set_motor(motor, dir, subvalue*2); // Scale speed value to 0-255 for PWM duty cycle
-
-            //avrkey = 0xFE;
-            //avrvalue = subkey;
-            subkey = 0x00; // Clear the subkey and subvalue after processing
-            subvalue = 0xFF; 
-            
-        }
-        */
     }
 }
 
@@ -250,10 +234,18 @@ ISR(SPI_STC_vect)
 
     if (rx_index >= PACKET_SIZE) {
 
-        // Copy into shadow struct
-        memcpy((void*)&packet_shadow, temp_buffer, PACKET_SIZE);
+        // Validate checksum: sum(sync + motors) should equal checksum byte
+        uint8_t computed = 0;
+        for (uint8_t i = 0; i < PACKET_SIZE - 1; i++) {
+            computed += temp_buffer[i];
+        }
 
-        packet_ready = 1;
+        if (computed == temp_buffer[PACKET_SIZE - 1]) {
+            // Copy into shadow struct only if checksum matches
+            memcpy((void*)&packet_shadow, temp_buffer, PACKET_SIZE);
+            packet_ready = 1;
+        }
+
         rx_index = 0;
     }
 

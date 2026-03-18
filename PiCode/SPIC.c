@@ -28,6 +28,10 @@ int main() {
     int8_t dpad_y = 0; // d-pad Y
     uint8_t buttons = 0; // button bitfield
     bool flag = false; // New data received flag
+    bool R1_latch = false; // latch for button bit 4 (prevent repeated action while held)
+    bool L1_latch = false; // latch for button bit 5 (prevent repeated action while held)
+    int8_t Ldir = 1; // left motor direction multiplier (toggle on button press)
+    int8_t Rdir = 1; // right motor direction multiplier (toggle on button press)
 
     // AVR Struct for spi communication
     typedef struct {
@@ -91,20 +95,45 @@ int main() {
 
         }
         if (flag) {
-            // SPI implementation would go here, sending the parsed inputs to the motor controllers
+            // Button press latch: perform the action once on the rising edge of button 4 (bit 4)
+            bool R1_pressed = (buttons & (1 << 4)) != 0;
+            bool L1_pressed = (buttons & (1 << 5)) != 0;
+
+            if (R1_pressed) {
+                if (!R1_latch) {
+                    // First packet after the button press: toggle direction multipliers
+                    Rdir = -Rdir;
+                    R1_latch = true;
+                }
+            } else {
+                // Button released; allow toggle again on next press
+                R1_latch = false;
+            }
+
+            if (L1_pressed) {
+                if (!L1_latch) {
+                    // First packet after the button press: toggle direction multipliers
+                    Ldir = -Ldir;
+                    L1_latch = true;
+                }
+            } else {
+                // Button released; allow toggle again on next press
+                L1_latch = false;
+            }
+
+            // Always send updated motor command (even while the button is held)
             AVRData DataTX;
                 DataTX.sync = 0xAA; // Sync byte to indicate start of packet
-                DataTX.motor[0] = L2/2; // Mapping: left trigger controls motor 1 speed
-                DataTX.motor[1] = R2/2; // Mapping: right trigger controls motor 2 speed
-                DataTX.motor[2] = L2/2; // Mapping: left trigger also controls motor 3 speed
-                DataTX.motor[3] = R2/2; // Mapping: right trigger also controls motor 4 speed
+                DataTX.motor[0] = Ldir * (L2 / 2); // Mapping: left trigger controls motor 1 speed
+                DataTX.motor[1] = Rdir * (R2 / 2); // Mapping: right trigger controls motor 2 speed
+                DataTX.motor[2] = Ldir * (L2 / 2); // Mapping: left trigger also controls motor 3 speed
+                DataTX.motor[3] = Rdir * (R2 / 2); // Mapping: right trigger also controls motor 4 speed
                 // DataTX.buttons = buttons; // Optionally include button states in the packet
                 DataTX.checksum = (DataTX.sync + DataTX.motor[0] + DataTX.motor[1] + DataTX.motor[2] + DataTX.motor[3]) & 0xFF; // Simple checksum calculation
 
             printf("Sending to AVR - Sync: 0x%X, Motors: [%d, %d, %d, %d], Checksum: 0x%X\n", DataTX.sync, DataTX.motor[0], DataTX.motor[1], DataTX.motor[2], DataTX.motor[3], DataTX.checksum); // log the data being sent to AVR
             spiXfer(handle, (unsigned char*)&DataTX, DataRX, sizeof(AVRData)); // Send the structured data over SPI
-            //DataTX = AVRData;
-            //spiXfer(handle, DataTX, DataRX, 1);
+
             flag = false; // reset flag until next packet is received
         }
 
