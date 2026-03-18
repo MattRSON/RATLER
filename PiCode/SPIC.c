@@ -105,6 +105,7 @@ int main() {
             spiXfer(handle, (unsigned char*)&DataTX, DataRX, sizeof(AVRData)); // Send the structured data over SPI
             //DataTX = AVRData;
             //spiXfer(handle, DataTX, DataRX, 1);
+            flag = false; // reset flag until next packet is received
         }
 
         gettimeofday(&now, NULL); // get current time for timeout calculation
