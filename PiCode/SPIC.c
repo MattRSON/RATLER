@@ -7,7 +7,9 @@
 #include <sys/socket.h> // socket, bind, recvfrom
 #include <sys/time.h>   // struct timeval, gettimeofday
 #include <pigpio.h>     // pigpio library for SPI communication with motor controllers
-//#include <time.h>       // time functions for timeout handling
+#include <stdbool.h>   // bool type for flag
+#include <time.h>       // time functions for timeout handling
+
 
 #define PORT 5000 // UDP port
 #define PACKET_SIZE 9 // Size of the packet sent from the Steam Deck (x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons)
