@@ -76,16 +76,16 @@ int main() {
         if (n == PACKET_SIZE) { // only process when full packet is received
             gettimeofday(&last_packet, NULL); // update last received time
 
-            int8_t x1 = (int8_t)buffer[0]; // left stick X
-            int8_t y1 = (int8_t)buffer[1]; // left stick Y
-            int8_t x2 = (int8_t)buffer[2]; // right stick X
-            int8_t y2 = (int8_t)buffer[3]; // right stick Y
-            uint8_t L2 = buffer[4]; // left trigger
-            uint8_t R2 = buffer[5]; // right trigger
-            int8_t dpad_x = (int8_t)buffer[6]; // d-pad X
-            int8_t dpad_y = (int8_t)buffer[7]; // d-pad Y
-            uint8_t buttons = buffer[8]; // button bitfield
-            bool flag = true; // New data received flag
+            x1 = (int8_t)buffer[0]; // left stick X
+            y1 = (int8_t)buffer[1]; // left stick Y
+            x2 = (int8_t)buffer[2]; // right stick X
+            y2 = (int8_t)buffer[3]; // right stick Y
+            L2 = buffer[4]; // left trigger
+            R2 = buffer[5]; // right trigger
+            dpad_x = (int8_t)buffer[6]; // d-pad X
+            dpad_y = (int8_t)buffer[7]; // d-pad Y
+            buttons = buffer[8]; // button bitfield
+            flag = true; // New data received flag
 
             //printf("X1:%d Y1:%d X2:%d Y2:%d L2:%u R2:%u DPX:%d DPY:%d BTN:%u\n", x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons); // print parsed inputs
 
