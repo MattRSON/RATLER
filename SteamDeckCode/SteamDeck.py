@@ -46,7 +46,6 @@ while True:
     try:
         sock.sendto(packet, (RPi_HOST, PORT)) # Send packet to Raspberry Pi
         attempt = 0
-        break  # Success, exit retry loop
     except socket.gaierror as e:
         print(f"Name resolution failed (attempt {attempt + 1}): {e}. Retrying...")
         time.sleep(5)  # Short delay before retry
