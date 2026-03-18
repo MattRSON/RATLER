@@ -42,13 +42,12 @@ while True:
     packet = struct.pack("bbbbBBbbB", x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons) # Assemble packet
 
     # Retry sending packet up to 3 times in case of temporary name resolution failure
-    
+    attempt = 0
     try:
-        sock.sendto(packet, (RPi_HOST, PORT)) # Send packet to Raspberry Pi
-        attempt = 0
+        sock.sendto(packet, (RPi_HOST, PORT)) # Send packet to Raspberry Pi 
     except socket.gaierror as e:
         print(f"Name resolution failed (attempt {attempt + 1}): {e}. Retrying...")
-        time.sleep(5)  # Short delay before retry
+        time.sleep(1)  # Short delay before retry
         
     except Exception as e:
         print(f"Unexpected error sending packet: {e}")
