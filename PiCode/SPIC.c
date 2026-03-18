@@ -96,8 +96,8 @@ int main() {
         }
         if (flag) {
             // Button press latch: perform the action once on the rising edge of button 4 (bit 4)
-            bool R1_pressed = (buttons & (1 << 4)) != 0;
-            bool L1_pressed = (buttons & (1 << 5)) != 0;
+            bool R1_pressed = (buttons & (1 << 5)) != 0;
+            bool L1_pressed = (buttons & (1 << 4)) != 0;
 
             if (R1_pressed) {
                 if (!R1_latch) {
