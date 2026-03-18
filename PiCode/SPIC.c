@@ -87,7 +87,7 @@ int main() {
             uint8_t buttons = buffer[8]; // button bitfield
             bool flag = true; // New data received flag
 
-            printf("X1:%d Y1:%d X2:%d Y2:%d L2:%u R2:%u DPX:%d DPY:%d BTN:%u\n", x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons); // print parsed inputs
+            //printf("X1:%d Y1:%d X2:%d Y2:%d L2:%u R2:%u DPX:%d DPY:%d BTN:%u\n", x1, y1, x2, y2, L2, R2, dpad_x, dpad_y, buttons); // print parsed inputs
 
         }
         if (flag) {
@@ -101,6 +101,7 @@ int main() {
                 // DataTX.buttons = buttons; // Optionally include button states in the packet
                 DataTX.checksum = (DataTX.sync + DataTX.motor[0] + DataTX.motor[1] + DataTX.motor[2] + DataTX.motor[3]) & 0xFF; // Simple checksum calculation
 
+            printf("Sending to AVR - Sync: 0x%X, Motors: [%d, %d, %d, %d], Checksum: 0x%X\n", DataTX.sync, DataTX.motor[0], DataTX.motor[1], DataTX.motor[2], DataTX.motor[3], DataTX.checksum); // log the data being sent to AVR
             spiXfer(handle, (unsigned char*)&DataTX, DataRX, sizeof(AVRData)); // Send the structured data over SPI
             //DataTX = AVRData;
             //spiXfer(handle, DataTX, DataRX, 1);
