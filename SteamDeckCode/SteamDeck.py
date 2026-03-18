@@ -48,7 +48,7 @@ while True:
         except socket.gaierror as e:
             if attempt < max_retries - 1:
                 print(f"Name resolution failed (attempt {attempt + 1}/{max_retries}): {e}. Retrying...")
-                time.sleep(0.1)  # Short delay before retry
+                time.sleep(1)  # Short delay before retry
             else:
                 print(f"Failed to send packet after {max_retries} attempts: {e}")
         except Exception as e:
