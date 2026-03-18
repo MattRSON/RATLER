@@ -110,7 +110,13 @@ int main() {
 
         if (elapsed_ms > TIMEOUT_MS) { // if no packet has arrived within timeout
             // Watchdog: Controller disconnected
-            input = 0; // set input to zero to stop everything
+            DataTX.sync = 0xAA;
+            DataTX.motor[0] = 0;
+            DataTX.motor[1] = 0;
+            DataTX.motor[2] = 0;
+            DataTX.motor[3] = 0;
+            DataTX.checksum = (DataTX.sync + DataTX.motor[0] + DataTX.motor[1] + DataTX.motor[2] + DataTX.motor[3]) & 0xFF;
+            spiXfer(handle, (unsigned char*)&DataTX, DataRX, sizeof(AVRData)); // Send the structured data over SPI
             printf("No packet received for %ld ms, stopping motors\n", elapsed_ms); // log timeout event
         }
 
